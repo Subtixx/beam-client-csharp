@@ -15,7 +15,7 @@ namespace beam_client_csharp.Tests
         public void Test_LoginFail()
         {
             BeamWeb bWeb = new BeamWeb();
-            Task<BeamUser> res = bWeb.Authenticate("travis-ci", "travis-ci");
+            Task<BeamUser.BeamUser> res = bWeb.Authenticate("travis-ci", "travis-ci");
             if (res.Result == null)
             {
                 Assert.Pass("BeamWeb Login fail test success");

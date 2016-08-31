@@ -14,7 +14,7 @@ namespace beam_client_csharp
     {
         CookieContainer _cookieContainer;
 
-        public async Task<BeamUser> Authenticate(string username, string password)
+        public async Task<BeamUser.BeamUser> Authenticate(string username, string password)
         {
             _cookieContainer = new CookieContainer();
 
@@ -36,7 +36,7 @@ namespace beam_client_csharp
                 if (result.ContainsKey("statusCode"))
                     return null;
 
-                return JsonConvert.DeserializeObject<BeamUser>(responseString);
+                return JsonConvert.DeserializeObject<BeamUser.BeamUser>(responseString);
             }
         }
 

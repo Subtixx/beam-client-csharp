@@ -53,6 +53,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="chatinfo.json" />
+    <None Include="chatmsg.json" />
     <None Include="loginresponse.json" />
     <None Include="packages.config" />
   </ItemGroup>

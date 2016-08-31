@@ -99,7 +99,7 @@ namespace beam_client_csharp
             {
                 case "event":
                     BeamEventMessage mEvent = JsonConvert.DeserializeObject<BeamEventMessage>(message);
-                    BeamEventHandler.HandleEvent(mEvent);
+                    BeamEventHandler.HandleEvent(mEvent, message);
                     break;
                 case "reply":
                     BeamReplyMessage mReply = JsonConvert.DeserializeObject<BeamReplyMessage>(message);

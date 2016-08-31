@@ -17,7 +17,7 @@ namespace beam_client_csharp.EventHandlers
                     throw new NotImplementedException(message.method);
 
                 case "msg":
-                    Console.WriteLine("Received Chat message: {0}", message.arguments[0]);
+                    Console.WriteLine("Received unknown message: {0}", message.arguments[0]);
                     break;
             }
         }

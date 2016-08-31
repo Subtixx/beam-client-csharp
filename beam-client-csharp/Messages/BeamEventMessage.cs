@@ -11,7 +11,7 @@ namespace beam_client_csharp.Messages
     /// This includes chat messages themselves, polls, and role changes.
     /// The full list can be found in the <see href="https://dev.beam.pro/reference/chat/index.html#chat__events">Events section</see>. 
     /// </summary>
-    class BeamEventMessage : BeamMessage
+    public class BeamEventMessage : BeamMessage
     {
         /// <summary>
         /// Gets or sets the event.
@@ -22,7 +22,7 @@ namespace beam_client_csharp.Messages
         /// Gets or sets the data.
         /// </summary>
         /// <value>Associated event data - may be of any type, specific to the event.</value>
-        public Dictionary<string, string> data { get; set; }
+        public virtual Dictionary<string, object> data { get; set; }
 
         public BeamEventMessage()
         {

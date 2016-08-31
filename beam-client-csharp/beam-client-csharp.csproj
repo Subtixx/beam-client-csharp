@@ -72,6 +72,11 @@
   <ItemGroup>
     <Compile Include="BeamChat.cs" />
     <Compile Include="BeamChatInfo.cs" />
+    <Compile Include="BeamEventMessages\ChatMessage\BeamEventChatMessage.cs" />
+    <Compile Include="BeamEventMessages\ChatMessage\Data.cs" />
+    <Compile Include="BeamEventMessages\ChatMessage\Message.cs" />
+    <Compile Include="BeamEventMessages\ChatMessage\Message2.cs" />
+    <Compile Include="BeamEventMessages\ChatMessage\Meta.cs" />
     <Compile Include="BeamUser\BeamUser.cs" />
     <Compile Include="BeamUser\Channel.cs" />
     <Compile Include="BeamUser\ChannelNotifications.cs" />

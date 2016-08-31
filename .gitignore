@@ -214,3 +214,4 @@ ModelManifest.xml
 *.tss
 /DemoApp/loginresponse.json
 /DemoApp/chatinfo.json
+/DemoApp/chatmsg.json
