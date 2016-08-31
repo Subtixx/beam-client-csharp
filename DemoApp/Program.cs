@@ -30,7 +30,14 @@ namespace DemoApp
                 throw new ArgumentException("Login incorrect?");
             }
 
+            BeamChatInfo chatInfo = bWeb.ChatInfo(user.channel.id).Result;
+            
+
             Console.WriteLine("UserID: {0}, ChannelID: {1}", user.id, user.channel.id);
+
+            BeamChat bChat = new BeamChat();
+            bChat.SetupWebsocket(chatInfo.endpoints[0]);
+            bChat.SetupCredentials(user.id.ToString(), user.channel.id.ToString(), chatInfo.authkey);
 
             Console.ReadKey();
             /*BeamChat beamChat = new BeamChat();
