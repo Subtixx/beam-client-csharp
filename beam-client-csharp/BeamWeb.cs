@@ -39,5 +39,21 @@ namespace beam_client_csharp
                 return JsonConvert.DeserializeObject<BeamUser>(responseString);
             }
         }
+
+        public async Task<BeamChatInfo> ChatInfo(int channelId)
+        {
+            if (_cookieContainer == null) throw new Exception("Authenticate has to be called first!");
+
+            using (var handler = new HttpClientHandler { CookieContainer = _cookieContainer })
+            using (var client = new HttpClient(handler))
+            {
+                var response = await client.GetAsync("https://beam.pro/api/v1/users/login");
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine(responseString);
+
+                return JsonConvert.DeserializeObject<BeamChatInfo>(responseString);
+            }
+        }
     }
 }
