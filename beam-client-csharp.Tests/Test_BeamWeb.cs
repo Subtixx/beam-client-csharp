@@ -14,18 +14,10 @@ namespace beam_client_csharp.Tests
         public void TestMethod()
         {
             BeamWeb bWeb = new BeamWeb();
-            Task<Dictionary<string, object>> res = bWeb.Authenticate("travis-ci", "travis-ci");
-            if (res.Result.ContainsKey("statusCode"))
+            Task<BeamUser> res = bWeb.Authenticate("travis-ci", "travis-ci");
+            if (res.Result == null)
             {
-                switch (int.Parse(res.Result["statusCode"].ToString()))
-                {
-                    default:
-                        throw new NotImplementedException(res.Result["statusCode"].ToString());
-
-                    case 401:
-                        Assert.Pass("BeamWeb 401 Login success");
-                        break;
-                }
+                Assert.Pass("BeamWeb Login fail test success");
             }
         }
     }
