@@ -87,7 +87,6 @@
     <Compile Include="BeamUser\TwoFactor.cs" />
     <Compile Include="BeamWeb.cs" />
     <Compile Include="EventHandlers\BeamEventHandler.cs" />
-    <Compile Include="EventHandlers\BeamMethodHandler.cs" />
     <Compile Include="Messages\BeamEventMessage.cs" />
     <Compile Include="Messages\BeamMessage.cs" />
     <Compile Include="Messages\BeamMethodMessage.cs" />
