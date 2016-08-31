@@ -165,5 +165,10 @@ namespace beam_client_csharp
             Username = username;
             Password = password;
         }
+
+        public void Disconnect()
+        {
+            _websocket.Close(0, "Application Exit");
+        }
     }
 }

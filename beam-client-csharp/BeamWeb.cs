@@ -47,7 +47,7 @@ namespace beam_client_csharp
             using (var handler = new HttpClientHandler { CookieContainer = _cookieContainer })
             using (var client = new HttpClient(handler))
             {
-                var response = await client.GetAsync("https://beam.pro/api/v1/users/login");
+                var response = await client.GetAsync("https://beam.pro/api/v1/chats/" + channelId);
                 var responseString = await response.Content.ReadAsStringAsync();
 
                 Console.WriteLine(responseString);
