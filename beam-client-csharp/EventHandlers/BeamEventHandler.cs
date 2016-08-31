@@ -151,8 +151,8 @@ namespace beam_client_csharp.EventHandlers
                 arguments = args
             }, replyMessage =>
             {
-                if (!(bool) replyMessage.data["authenticated"] && string.IsNullOrEmpty(BeamChat.Username) &&
-                    string.IsNullOrEmpty(BeamChat.Password)
+                if (!(bool) replyMessage.data["authenticated"] && !string.IsNullOrEmpty(BeamChat.Username) &&
+                    !string.IsNullOrEmpty(BeamChat.Password)
                     )
                     throw new Exception("Chat authentication failed!");
             });
