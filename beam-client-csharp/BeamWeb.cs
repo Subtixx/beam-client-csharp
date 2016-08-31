@@ -42,8 +42,7 @@ namespace beam_client_csharp
 
         public async Task<BeamChatInfo> ChatInfo(int channelId)
         {
-            if (_cookieContainer == null) throw new Exception("Authenticate has to be called first!");
-
+            if(_cookieContainer == null) _cookieContainer = new CookieContainer();
             using (var handler = new HttpClientHandler { CookieContainer = _cookieContainer })
             using (var client = new HttpClient(handler))
             {
