@@ -71,6 +71,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeamChat.cs" />
+    <Compile Include="BeamUser\BeamUser.cs" />
+    <Compile Include="BeamUser\Channel.cs" />
+    <Compile Include="BeamUser\ChannelNotifications.cs" />
+    <Compile Include="BeamUser\ChannelPlayer.cs" />
+    <Compile Include="BeamUser\Group.cs" />
+    <Compile Include="BeamUser\Preferences.cs" />
+    <Compile Include="BeamUser\Social.cs" />
+    <Compile Include="BeamUser\TwoFactor.cs" />
     <Compile Include="BeamWeb.cs" />
     <Compile Include="EventHandlers\BeamEventHandler.cs" />
     <Compile Include="EventHandlers\BeamMethodHandler.cs" />

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace beam_client_csharp
 {
@@ -13,7 +14,7 @@ namespace beam_client_csharp
     {
         CookieContainer _cookieContainer;
 
-        public async Task<Dictionary<string, object>> Authenticate(string username, string password)
+        public async Task<BeamUser> Authenticate(string username, string password)
         {
             _cookieContainer = new CookieContainer();
 
@@ -31,7 +32,11 @@ namespace beam_client_csharp
                 var responseString = await response.Content.ReadAsStringAsync();
 
                 Console.WriteLine(responseString);
-                return JsonConvert.DeserializeObject<Dictionary<string, object>>(responseString);
+                Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseString);
+                if (result.ContainsKey("statusCode"))
+                    return null;
+
+                return JsonConvert.DeserializeObject<BeamUser>(responseString);
             }
         }
     }

@@ -4,28 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using beam_client_csharp;
+using Newtonsoft.Json.Linq;
 
 namespace DemoApp
 {
     class Program
     {
+        private static Dictionary<string, string> _configDictionary;
+
         static void Main(string[] args)
         {
-            BeamWeb bWeb = new BeamWeb();
-            Task<Dictionary<string, object>> res = bWeb.Authenticate("lol", "lol");
-            if (res.Result.ContainsKey("statusCode"))
-            {
-                switch (int.Parse(res.Result["statusCode"].ToString()))
-                {
-                    default:
-                        throw new NotImplementedException(res.Result["statusCode"].ToString());
+            loadConfig();
 
-                    case 401:
-                        Console.WriteLine("Login was not successfull");
-                        break;
-                }
+            if (!_configDictionary.ContainsKey("username") ||
+                !_configDictionary.ContainsKey("password"))
+                return;
+
+            BeamWeb bWeb = new BeamWeb();
+            Task<BeamUser> res = bWeb.Authenticate(_configDictionary["username"], _configDictionary["password"]);
+            BeamUser user = res.Result;
+            if (user == null)
+            {
+                throw new ArgumentException("Login incorrect?");
             }
+
+            Console.WriteLine("UserID: {0}, ChannelID: {1}", user.id, user.channel.id);
+
             Console.ReadKey();
             /*BeamChat beamChat = new BeamChat();
 
@@ -40,6 +46,18 @@ namespace DemoApp
 
             /*
             beamChat.websocket_MessageReceived(null, new MessageReceivedEventArgs("{\"type\":\"event\",\"event\":\"WelcomeEvent\",\"data\":{\"server\":\"891c12de-d4f8-4b4f-971f-5e69b6b65075\"}}"));*/
+        }
+
+        private static void loadConfig()
+        {
+            _configDictionary = new Dictionary<string, string>();
+
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load("config.xml");
+            foreach (XmlAttribute xnn in xdoc.ChildNodes[1].Attributes)
+            {
+                _configDictionary.Add(xnn.Name, xnn.Value);
+            }
         }
     }
 }
