@@ -1,0 +1,8 @@
+language: csharp
+solution: beam-client-csharp.sln
+install:
+  - nuget restore beam-client-csharp.sln
+  - nuget install NUnit.Runners -Version 3.4.1 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release beam-client-csharp.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./beam-client-csharp.Tests/bin/Release/beam-client-csharp.Tests.dll
