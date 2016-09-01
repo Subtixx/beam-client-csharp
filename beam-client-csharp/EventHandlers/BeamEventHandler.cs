@@ -204,7 +204,7 @@ namespace beam_client_csharp.EventHandlers
                 if (user == null)
                     return;
 
-                var chat = beamWeb.ChatInfo(user.channel.id).Result;
+                var chat = beamWeb.GetChatInformation(user.channel.id).Result;
                 if (string.IsNullOrEmpty(chat.authkey))
                     return;
 

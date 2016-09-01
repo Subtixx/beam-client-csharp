@@ -26,7 +26,7 @@ namespace beam_client_csharp.Tests
         public void Test_ChatInfo()
         {
             BeamWeb bWeb = new BeamWeb();
-            Task<BeamChatInfo> res = bWeb.ChatInfo(197242);
+            Task<BeamChatInfo> res = bWeb.GetChatInformation(197242);
             BeamChatInfo chatInfo = res.Result;
 
             if (chatInfo == null || chatInfo.endpoints.Count == 0)

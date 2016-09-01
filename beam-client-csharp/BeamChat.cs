@@ -145,7 +145,6 @@ namespace beam_client_csharp
         /// Processes the messages from beam chat.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <exception cref="System.NotImplementedException"></exception>
         private void ProcessMessage(string message)
         {
             var beamMessage = JsonConvert.DeserializeObject<BeamMessage>(message);

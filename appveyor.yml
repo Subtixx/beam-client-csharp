@@ -27,7 +27,7 @@ deploy:
 - provider: GitHub
   auth_token:
     secure: J23h13Yo4W+yv7Z4aTH9/d6K5mhV05LmT7bmQgE8xvF82clg21mSCataOjrQX0uV
-  artifact: beam-client-csharp/bin/Release/beam-client-csharp.dll
+  artifact: /.*\.dll/
   prerelease: false
   force_update: false
   on:

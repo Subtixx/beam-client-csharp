@@ -28,7 +28,7 @@ namespace DemoApp
                 throw new ArgumentException("Login incorrect?");
             }
 
-            var chatInfo = bWeb.ChatInfo(user.channel.id).Result;
+            var chatInfo = bWeb.GetChatInformation(user.channel.id).Result;
             if (chatInfo == null || chatInfo.endpoints.Count == 0)
             {
                 throw new ArgumentException("Channel Id incorrect?");
