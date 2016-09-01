@@ -68,7 +68,7 @@ namespace beam_client_csharp
                 {"password", password}
             };
 
-            var loginResult = await Call_API("users/login", values);
+            var loginResult = await Call_API("users/login", values, HttpMethod.Post);
             var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(loginResult);
             return result.ContainsKey("statusCode")
                 ? null
@@ -124,9 +124,12 @@ namespace beam_client_csharp
         /// </summary>
         /// <param name="subUrl">The sub URL.</param>
         /// <param name="values">The values.</param>
+        /// <param name="method">The method.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
-        private async Task<string> Call_API(string subUrl, Dictionary<string, string> values = null)
+        private async Task<string> Call_API(string subUrl, Dictionary<string, string> values = null, HttpMethod method = null)
         {
+            if (method == null)
+                method = HttpMethod.Get;
             if (_remainingApiCalls.ContainsKey(subUrl))
             {
                 if (_remainingApiCalls[subUrl] == 0)
@@ -149,14 +152,24 @@ namespace beam_client_csharp
             {
                 client.DefaultRequestHeaders.Add("X-CSRF-Token", _csrfToken);
                 HttpResponseMessage response;
-                if (values != null)
+                if (method == HttpMethod.Post)
                 {
-                    var content = new FormUrlEncodedContent(values);
+                    var content = new FormUrlEncodedContent(new Dictionary<string, string>());
+                    if (values != null)
+                        content = new FormUrlEncodedContent(values);
 
                     response = await client.PostAsync($"https://beam.pro/api/v1/{subUrl}", content);
                 }
-                else
+                else if (method == HttpMethod.Put)
+                {
+                    response = await client.PutAsync($"https://beam.pro/api/v1/{subUrl}", new MultipartFormDataContent());
+                }
+                else if(method == HttpMethod.Get)
                     response = await client.GetAsync($"https://beam.pro/api/v1/{subUrl}");
+                else
+                {
+                    throw new NotImplementedException($"Method {method.Method} is not implemented!");
+                }
 
                 var responseString = await response.Content.ReadAsStringAsync();
 
@@ -211,7 +224,7 @@ namespace beam_client_csharp
                         case (HttpStatusCode)461: // CSRF Missing
                             // Retry with CSRF, maybe bad because it's recursive call?
                             _csrfToken = response.Headers.GetValues("X-CSRF-Token").FirstOrDefault();
-                            return await Call_API(subUrl, values);
+                            return await Call_API(subUrl, values, method);
                         
                         // Bad or expired token. This can happen if the user or Beam revoked or expired an access token.
                         // To fix, you should re- authenticate the user.
@@ -475,6 +488,11 @@ namespace beam_client_csharp
                 JsonConvert.DeserializeObject<List<BeamChannel.BeamChannel>>(
                     await Call_API($"channels/{channelId}/follow?page={page}&limit={limit}&where={where}&fields={fields}&order={order}"));
         }
+
+        /*public async Task<> FollowChannel(int channelId)
+        {
+            
+        }*/
         #endregion
     }
 }
