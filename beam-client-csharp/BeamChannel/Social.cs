@@ -21,34 +21,29 @@ namespace beam_client_csharp.BeamChannel
     public class Social
     {
         /// <summary>
+        /// Gets or sets the player.
+        /// </summary>
+        /// <value>The player.</value>
+        public string player { get; set; }
+        /// <summary>
         /// Gets or sets the twitter.
         /// </summary>
         /// <value>The twitter.</value>
         public string twitter { get; set; }
-        /// <summary>
-        /// Gets or sets the facebook.
-        /// </summary>
-        /// <value>The facebook.</value>
-        public string facebook { get; set; }
         /// <summary>
         /// Gets or sets the youtube.
         /// </summary>
         /// <value>The youtube.</value>
         public string youtube { get; set; }
         /// <summary>
+        /// Gets or sets the verified.
+        /// </summary>
+        /// <value>The verified.</value>
+        public List<string> verified { get; set; }
+        /// <summary>
         /// Gets or sets the discord.
         /// </summary>
         /// <value>The discord.</value>
         public string discord { get; set; }
-        /// <summary>
-        /// Gets or sets the verified.
-        /// </summary>
-        /// <value>The verified.</value>
-        public List<object> verified { get; set; }
-        /// <summary>
-        /// Gets or sets the player.
-        /// </summary>
-        /// <value>The player.</value>
-        public string player { get; set; }
     }
 }

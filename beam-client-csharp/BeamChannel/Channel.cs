@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : beam_client_csharp
 // Author           : Subtixx
 // Created          : 09-01-2016
@@ -6,23 +6,23 @@
 // Last Modified By : Subtixx
 // Last Modified On : 09-01-2016
 // ***********************************************************************
-// <copyright file="BeamChannel.cs" company="Flying Penguin">
-//     Copyright ©  2016
+// <copyright file="Channel.cs" company="Flying Penguin">
+//     Copyright �  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 namespace beam_client_csharp.BeamChannel
 {
     /// <summary>
-    /// Class BeamChannel.
+    /// Class Channel.
     /// </summary>
-    public class BeamChannel
+    public class Channel
     {
         /// <summary>
         /// Gets or sets the tetris game identifier.
         /// </summary>
         /// <value>The tetris game identifier.</value>
-        public int? tetrisGameId { get; set; }
+        public int tetrisGameId { get; set; }
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -39,17 +39,17 @@ namespace beam_client_csharp.BeamChannel
         /// <value>The token.</value>
         public string token { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is online.
+        /// Gets or sets a value indicating whether this <see cref="Channel"/> is online.
         /// </summary>
         /// <value><c>true</c> if online; otherwise, <c>false</c>.</value>
         public bool online { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is featured.
+        /// Gets or sets a value indicating whether this <see cref="Channel"/> is featured.
         /// </summary>
         /// <value><c>true</c> if featured; otherwise, <c>false</c>.</value>
         public bool featured { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is partnered.
+        /// Gets or sets a value indicating whether this <see cref="Channel"/> is partnered.
         /// </summary>
         /// <value><c>true</c> if partnered; otherwise, <c>false</c>.</value>
         public bool partnered { get; set; }
@@ -57,9 +57,9 @@ namespace beam_client_csharp.BeamChannel
         /// Gets or sets the transcoding profile identifier.
         /// </summary>
         /// <value>The transcoding profile identifier.</value>
-        public int? transcodingProfileId { get; set; }
+        public int transcodingProfileId { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is suspended.
+        /// Gets or sets a value indicating whether this <see cref="Channel"/> is suspended.
         /// </summary>
         /// <value><c>true</c> if suspended; otherwise, <c>false</c>.</value>
         public bool suspended { get; set; }
@@ -97,9 +97,9 @@ namespace beam_client_csharp.BeamChannel
         /// Gets or sets the type identifier.
         /// </summary>
         /// <value>The type identifier.</value>
-        public int? typeId { get; set; }
+        public int typeId { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is interactive.
+        /// Gets or sets a value indicating whether this <see cref="Channel"/> is interactive.
         /// </summary>
         /// <value><c>true</c> if interactive; otherwise, <c>false</c>.</value>
         public bool interactive { get; set; }
@@ -107,7 +107,7 @@ namespace beam_client_csharp.BeamChannel
         /// Gets or sets the interactive game identifier.
         /// </summary>
         /// <value>The interactive game identifier.</value>
-        public int? interactiveGameId { get; set; }
+        public int interactiveGameId { get; set; }
         /// <summary>
         /// Gets or sets the FTL.
         /// </summary>
@@ -127,12 +127,12 @@ namespace beam_client_csharp.BeamChannel
         /// Gets or sets the cover identifier.
         /// </summary>
         /// <value>The cover identifier.</value>
-        public int? coverId { get; set; }
+        public int coverId { get; set; }
         /// <summary>
         /// Gets or sets the thumbnail identifier.
         /// </summary>
         /// <value>The thumbnail identifier.</value>
-        public int? thumbnailId { get; set; }
+        public int thumbnailId { get; set; }
         /// <summary>
         /// Gets or sets the badge identifier.
         /// </summary>
@@ -168,35 +168,5 @@ namespace beam_client_csharp.BeamChannel
         /// </summary>
         /// <value>The deleted at.</value>
         public object deletedAt { get; set; }
-        /// <summary>
-        /// Gets or sets the thumbnail.
-        /// </summary>
-        /// <value>The thumbnail.</value>
-        public Thumbnail thumbnail { get; set; }
-        /// <summary>
-        /// Gets or sets the cover.
-        /// </summary>
-        /// <value>The cover.</value>
-        public Cover cover { get; set; }
-        /// <summary>
-        /// Gets or sets the badge.
-        /// </summary>
-        /// <value>The badge.</value>
-        public object badge { get; set; }
-        /// <summary>
-        /// Gets or sets the type.
-        /// </summary>
-        /// <value>The type.</value>
-        public Type type { get; set; }
-        /// <summary>
-        /// Gets or sets the preferences.
-        /// </summary>
-        /// <value>The preferences.</value>
-        public Preferences preferences { get; set; }
-        /// <summary>
-        /// Gets or sets the user.
-        /// </summary>
-        /// <value>The user.</value>
-        public User user { get; set; }
     }
 }

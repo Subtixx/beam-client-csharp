@@ -11,6 +11,8 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.Collections.Generic;
+
 namespace beam_client_csharp.BeamChannel
 {
     /// <summary>
@@ -62,7 +64,7 @@ namespace beam_client_csharp.BeamChannel
         /// Gets or sets the bio.
         /// </summary>
         /// <value>The bio.</value>
-        public string bio { get; set; }
+        public object bio { get; set; }
         /// <summary>
         /// Gets or sets the primary team.
         /// </summary>
@@ -83,5 +85,15 @@ namespace beam_client_csharp.BeamChannel
         /// </summary>
         /// <value>The deleted at.</value>
         public object deletedAt { get; set; }
+        /// <summary>
+        /// Gets or sets the groups.
+        /// </summary>
+        /// <value>The groups.</value>
+        public List<Group> groups { get; set; }
+        /// <summary>
+        /// Gets or sets the channel.
+        /// </summary>
+        /// <value>The channel.</value>
+        public Channel channel { get; set; }
     }
 }

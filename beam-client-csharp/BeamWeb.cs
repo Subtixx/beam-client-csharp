@@ -93,7 +93,7 @@ namespace beam_client_csharp
         /// <summary>
         ///     Creates the announcement.
         /// </summary>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         [Obsolete("This method is not implemented", false)]
         public void CreateAnnouncement()
         {
@@ -186,28 +186,37 @@ namespace beam_client_csharp
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    if (response.StatusCode == (HttpStatusCode)429) // API Rate limit
+                    switch (response.StatusCode)
                     {
-                        // Prevent calling this page again.
-                        if (_remainingApiCalls.ContainsKey(subUrl))
-                            _remainingApiCalls[subUrl] = 0;
-                        else
-                            _remainingApiCalls.Add(subUrl, 0);
-                        Console.WriteLine("API Rate limit hit. Preventing further calling!");
-                    }
-                    else if (response.StatusCode == (HttpStatusCode)461) // CSRF Missing
-                    {
-                        _csrfToken = response.Headers.GetValues("X-CSRF-Token").FirstOrDefault();
-                        return await Call_API(subUrl, values);
-                        // Retry with CSRF, maybe bad because it's recursive call?
-                    }
-                    else
-                    {
-                        Console.WriteLine(
+                        default:
+                            Console.WriteLine(
                             $"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
 #if !DEBUG
-                        throw new Exception($"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
+                            throw new Exception($"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
 #endif
+                            break;
+                        case (HttpStatusCode)429: // API Rate limit
+                            // Prevent calling this page again.
+                            if (_remainingApiCalls.ContainsKey(subUrl)) // I dunno but I feel like I don't need to check this as the prev. one is already inserting..
+                                _remainingApiCalls[subUrl] = 0;
+                            else
+                                _remainingApiCalls.Add(subUrl, 0);
+                            Console.WriteLine("API Rate limit hit. Preventing further calling!");
+                            break;
+                        case (HttpStatusCode)461: // CSRF Missing
+                            // Retry with CSRF, maybe bad because it's recursive call?
+                            _csrfToken = response.Headers.GetValues("X-CSRF-Token").FirstOrDefault();
+                            return await Call_API(subUrl, values);
+                        
+                        // Bad or expired token. This can happen if the user or Beam revoked or expired an access token.
+                        // To fix, you should re- authenticate the user.
+                        case (HttpStatusCode)401: // Unauthorized / Login missing
+                            break;
+
+                        //Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...).
+                        // Unfortunately, re-authenticating the user won't help here.
+                        //Can also indicate a missing permission for the action attempted.
+                        //case (HttpStatusCode)403: // Forbidden
                     }
                 }
                 return responseString;
@@ -241,6 +250,16 @@ namespace beam_client_csharp
         public async Task<BeamChannel.BeamChannel> GetChannel(int channelId)
         {
             return JsonConvert.DeserializeObject<BeamChannel.BeamChannel>(await Call_API($"channels/{channelId}"));
+        }
+
+        /// <summary>
+        /// Gets the channel details.
+        /// </summary>
+        /// <param name="channelIdOrToken">The channel identifier or token.</param>
+        /// <returns>Task&lt;BeamChannel.BeamChannel&gt;.</returns>
+        public async Task<BeamChannel.BeamChannel> GetChannelDetails(int channelIdOrToken)
+        {
+            return JsonConvert.DeserializeObject<BeamChannel.BeamChannel>(await Call_API($"channels/{channelIdOrToken}/details"));
         }
 
         #endregion

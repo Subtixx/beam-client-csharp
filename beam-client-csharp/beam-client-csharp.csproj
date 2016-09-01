@@ -108,7 +108,12 @@
   <ItemGroup>
     <Compile Include="BeamAchievement.cs" />
     <Compile Include="BeamChannel\BeamChannel.cs" />
+    <Compile Include="BeamChannel\Channel.cs" />
+    <Compile Include="BeamChannel\Cover.cs" />
+    <Compile Include="BeamChannel\Group.cs" />
     <Compile Include="BeamChannel\Meta.cs" />
+    <Compile Include="BeamChannel\Meta2.cs" />
+    <Compile Include="BeamChannel\Preferences.cs" />
     <Compile Include="BeamChannel\Social.cs" />
     <Compile Include="BeamChannel\Thumbnail.cs" />
     <Compile Include="BeamChannel\Type.cs" />
