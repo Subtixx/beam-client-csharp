@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
 using beam_client_csharp;
 using beam_client_csharp.BeamEventMessages.ChatMessage;
-using beam_client_csharp.BeamUser;
 using beam_client_csharp.EventHandlers;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace DemoApp
 {
-    class Program
+    internal class Program
     {
         private static Dictionary<string, string> _configDictionary;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             loadConfig();
 
@@ -26,15 +20,15 @@ namespace DemoApp
                 !_configDictionary.ContainsKey("password"))
                 return;
 
-            BeamWeb bWeb = new BeamWeb();
-            Task<BeamUser> res = bWeb.Authenticate(_configDictionary["username"], _configDictionary["password"]);
-            BeamUser user = res.Result;
+            var bWeb = new BeamWeb();
+            var res = bWeb.Authenticate(_configDictionary["username"], _configDictionary["password"]);
+            var user = res.Result;
             if (user == null)
             {
                 throw new ArgumentException("Login incorrect?");
             }
 
-            BeamChatInfo chatInfo = bWeb.ChatInfo(user.channel.id).Result;
+            var chatInfo = bWeb.ChatInfo(user.channel.id).Result;
             if (chatInfo == null || chatInfo.endpoints.Count == 0)
             {
                 throw new ArgumentException("Channel Id incorrect?");
@@ -42,14 +36,14 @@ namespace DemoApp
 
             Console.WriteLine("UserID: {0}, ChannelID: {1}", user.id, user.channel.id);
 
-            BeamChat bChat = new BeamChat();
+            var bChat = new BeamChat();
             bChat.SetupWebsocket(chatInfo.endpoints[0]);
             bChat.SetupCredentials(user.id, user.channel.id, chatInfo.authkey);
             bChat.Connect();
 
             BeamEventHandler.AddEventHandler(EventHandlerTypes.ChatMessageEvent, (message, underlayingMessage) =>
             {
-                BeamEventChatMessage chatMessage = JsonConvert.DeserializeObject<BeamEventChatMessage>(underlayingMessage);
+                var chatMessage = JsonConvert.DeserializeObject<BeamEventChatMessage>(underlayingMessage);
                 Console.WriteLine("Received Chat message: {0}", chatMessage.data.message.message[0].text);
             });
 
@@ -75,7 +69,7 @@ namespace DemoApp
         {
             _configDictionary = new Dictionary<string, string>();
 
-            XmlDocument xdoc = new XmlDocument();
+            var xdoc = new XmlDocument();
             xdoc.Load("config.xml");
             foreach (XmlAttribute xnn in xdoc.ChildNodes[1].Attributes)
             {
