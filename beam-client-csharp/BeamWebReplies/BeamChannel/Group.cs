@@ -6,32 +6,27 @@
 // Last Modified By : Subtixx
 // Last Modified On : 09-01-2016
 // ***********************************************************************
-// <copyright file="Message2.cs" company="Flying Penguin">
+// <copyright file="Group.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+namespace beam_client_csharp.BeamChannel
 {
     /// <summary>
-    /// Class Message2.
+    /// Class Group.
     /// </summary>
-    public class Message2
+    public class Group
     {
         /// <summary>
-        /// Gets or sets the type.
+        /// Gets or sets the identifier.
         /// </summary>
-        /// <value>The type.</value>
-        public string type { get; set; }
+        /// <value>The identifier.</value>
+        public int id { get; set; }
         /// <summary>
-        /// Gets or sets the data.
+        /// Gets or sets the name.
         /// </summary>
-        /// <value>The data.</value>
-        public string data { get; set; }
-        /// <summary>
-        /// Gets or sets the text.
-        /// </summary>
-        /// <value>The text.</value>
-        public string text { get; set; }
+        /// <value>The name.</value>
+        public string name { get; set; }
     }
 }

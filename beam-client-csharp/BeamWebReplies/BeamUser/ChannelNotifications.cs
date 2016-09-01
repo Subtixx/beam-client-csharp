@@ -1,34 +1,34 @@
 // ***********************************************************************
 // Assembly         : beam_client_csharp
 // Author           : Subtixx
-// Created          : 09-01-2016
+// Created          : 08-31-2016
 //
 // Last Modified By : Subtixx
 // Last Modified On : 09-01-2016
 // ***********************************************************************
-// <copyright file="Message.cs" company="Flying Penguin">
+// <copyright file="ChannelNotifications.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
 
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+namespace beam_client_csharp.BeamUser
 {
     /// <summary>
-    /// Class Message.
+    /// Class ChannelNotifications.
     /// </summary>
-    public class Message
+    public class ChannelNotifications
     {
         /// <summary>
-        /// Gets or sets the message.
+        /// Gets or sets the ids.
         /// </summary>
-        /// <value>The message.</value>
-        public List<Message2> message { get; set; }
+        /// <value>The ids.</value>
+        public List<string> ids { get; set; }
         /// <summary>
-        /// Gets or sets the meta.
+        /// Gets or sets the transports.
         /// </summary>
-        /// <value>The meta.</value>
-        public Meta meta { get; set; }
+        /// <value>The transports.</value>
+        public List<string> transports { get; set; }
     }
 }

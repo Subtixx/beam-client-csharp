@@ -6,35 +6,34 @@
 // Last Modified By : Subtixx
 // Last Modified On : 09-01-2016
 // ***********************************************************************
-// <copyright file="BeamMessage.cs" company="Flying Penguin">
+// <copyright file="BeamChatInfo.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.Messages
+using System.Collections.Generic;
+
+namespace beam_client_csharp
 {
     /// <summary>
-    /// Class BeamMessage.
+    /// Class BeamChatInfo.
     /// </summary>
-    public class BeamMessage
+    public class BeamChatInfo
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamMessage"/> class.
+        /// Gets or sets the endpoints.
         /// </summary>
-        public BeamMessage()
-        {
-            type = "unknown";
-        }
-
+        /// <value>The endpoints.</value>
+        public List<string> endpoints { get; set; }
         /// <summary>
-        /// Gets or sets the type.
+        /// Gets or sets the authkey.
         /// </summary>
-        /// <value>The type.</value>
-        public string type { get; set; }
+        /// <value>The authkey.</value>
+        public string authkey { get; set; }
         /// <summary>
-        /// Gets or sets the identifier.
+        /// Gets or sets the permissions.
         /// </summary>
-        /// <value>The identifier.</value>
-        public virtual int id { get; set; }
+        /// <value>The permissions.</value>
+        public List<string> permissions { get; set; }
     }
 }

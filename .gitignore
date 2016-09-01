@@ -215,3 +215,5 @@ ModelManifest.xml
 /DemoApp/loginresponse.json
 /DemoApp/chatinfo.json
 /DemoApp/chatmsg.json
+/DemoApp/achievements.json
+/DemoApp/listchannels.json

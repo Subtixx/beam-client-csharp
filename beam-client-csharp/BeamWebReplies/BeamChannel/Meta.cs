@@ -11,12 +11,19 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+using System.Collections.Generic;
+
+namespace beam_client_csharp.BeamChannel
 {
     /// <summary>
     /// Class Meta.
     /// </summary>
     public class Meta
     {
+        /// <summary>
+        /// Gets or sets the size.
+        /// </summary>
+        /// <value>The size.</value>
+        public List<int> size { get; set; }
     }
 }

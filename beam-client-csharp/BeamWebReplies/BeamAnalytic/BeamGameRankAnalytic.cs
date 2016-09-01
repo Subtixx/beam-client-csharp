@@ -1,40 +1,42 @@
 ﻿// ***********************************************************************
 // Assembly         : beam_client_csharp
 // Author           : Subtixx
-// Created          : 08-31-2016
+// Created          : 09-01-2016
 //
 // Last Modified By : Subtixx
 // Last Modified On : 09-01-2016
 // ***********************************************************************
-// <copyright file="BeamMessage.cs" company="Flying Penguin">
+// <copyright file="BeamGameRankAnalytic.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.Messages
+namespace beam_client_csharp
 {
     /// <summary>
-    /// Class BeamMessage.
+    /// Class BeamGameRankAnalytic.
     /// </summary>
-    public class BeamMessage
+    public class BeamGameRankAnalytic
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamMessage"/> class.
+        /// The channel
         /// </summary>
-        public BeamMessage()
-        {
-            type = "unknown";
-        }
-
+        public uint channel;
         /// <summary>
-        /// Gets or sets the type.
+        /// The streams
         /// </summary>
-        /// <value>The type.</value>
-        public string type { get; set; }
+        public uint streams;
         /// <summary>
-        /// Gets or sets the identifier.
+        /// The views
         /// </summary>
-        /// <value>The identifier.</value>
-        public virtual int id { get; set; }
+        public uint views;
+        /// <summary>
+        /// The shared
+        /// </summary>
+        public uint shared;
+        /// <summary>
+        /// The time
+        /// </summary>
+        public string time;
     }
 }

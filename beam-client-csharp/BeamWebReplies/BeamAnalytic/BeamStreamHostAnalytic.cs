@@ -1,40 +1,38 @@
 ﻿// ***********************************************************************
 // Assembly         : beam_client_csharp
 // Author           : Subtixx
-// Created          : 08-31-2016
+// Created          : 09-01-2016
 //
 // Last Modified By : Subtixx
 // Last Modified On : 09-01-2016
 // ***********************************************************************
-// <copyright file="BeamMessage.cs" company="Flying Penguin">
+// <copyright file="BeamStreamHost.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.Messages
+namespace beam_client_csharp.BeamWebReplies.BeamAnalytic
 {
     /// <summary>
-    /// Class BeamMessage.
+    /// Class BeamStreamHost.
     /// </summary>
-    public class BeamMessage
+    public class BeamStreamHostAnalytic
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamMessage"/> class.
+        /// The channel
         /// </summary>
-        public BeamMessage()
-        {
-            type = "unknown";
-        }
-
+        public int channel;
         /// <summary>
-        /// Gets or sets the type.
+        /// The hoster
         /// </summary>
-        /// <value>The type.</value>
-        public string type { get; set; }
+        public uint? hoster;
         /// <summary>
-        /// Gets or sets the identifier.
+        /// The hostee
         /// </summary>
-        /// <value>The identifier.</value>
-        public virtual int id { get; set; }
+        public uint? hostee;
+        /// <summary>
+        /// The time as iso date
+        /// </summary>
+        public string time;
     }
 }

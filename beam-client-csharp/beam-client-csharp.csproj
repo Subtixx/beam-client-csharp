@@ -106,21 +106,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeamWebReplies\BeamAnalytic\BeamFollower.cs" />
+    <Compile Include="BeamWebReplies\BeamAnalytic\BeamSubscription.cs" />
+    <Compile Include="BeamWebReplies\BeamAchievement.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\BeamChannel.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Channel.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Cover.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Group.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Meta.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Meta2.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Preferences.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Social.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Thumbnail.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\Type.cs" />
+    <Compile Include="BeamWebReplies\BeamChannel\User.cs" />
     <Compile Include="BeamChat.cs" />
-    <Compile Include="BeamChatInfo.cs" />
+    <Compile Include="BeamWebReplies\BeamChatInfo.cs" />
     <Compile Include="BeamEventMessages\ChatMessage\BeamEventChatMessage.cs" />
     <Compile Include="BeamEventMessages\ChatMessage\Data.cs" />
     <Compile Include="BeamEventMessages\ChatMessage\Message.cs" />
     <Compile Include="BeamEventMessages\ChatMessage\Message2.cs" />
     <Compile Include="BeamEventMessages\ChatMessage\Meta.cs" />
-    <Compile Include="BeamUser\BeamUser.cs" />
-    <Compile Include="BeamUser\Channel.cs" />
-    <Compile Include="BeamUser\ChannelNotifications.cs" />
-    <Compile Include="BeamUser\ChannelPlayer.cs" />
-    <Compile Include="BeamUser\Group.cs" />
-    <Compile Include="BeamUser\Preferences.cs" />
-    <Compile Include="BeamUser\Social.cs" />
-    <Compile Include="BeamUser\TwoFactor.cs" />
+    <Compile Include="BeamWebReplies\BeamAnalytic\BeamStreamHost.cs" />
+    <Compile Include="BeamWebReplies\BeamAnalytic\BeamStreamSession.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\BeamUser.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\Channel.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\ChannelNotifications.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\ChannelPlayer.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\Group.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\Preferences.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\Social.cs" />
+    <Compile Include="BeamWebReplies\BeamUser\TwoFactor.cs" />
+    <Compile Include="BeamWebReplies\BeamAnalytic\BeamViewer.cs" />
+    <Compile Include="BeamWebReplies\BeamAnalytic\BeamViewerMetric.cs" />
     <Compile Include="BeamWeb.cs" />
     <Compile Include="EventHandlers\BeamEventHandler.cs" />
     <Compile Include="Messages\BeamEventMessage.cs" />
@@ -128,6 +146,7 @@
     <Compile Include="Messages\BeamMethodMessage.cs" />
     <Compile Include="Messages\BeamReplyMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\UnixTimestamp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,37 +1,38 @@
 // ***********************************************************************
 // Assembly         : beam_client_csharp
 // Author           : Subtixx
-// Created          : 09-01-2016
+// Created          : 08-31-2016
 //
 // Last Modified By : Subtixx
 // Last Modified On : 09-01-2016
 // ***********************************************************************
-// <copyright file="Message2.cs" company="Flying Penguin">
+// <copyright file="ChannelPlayer.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+
+namespace beam_client_csharp.BeamUser
 {
     /// <summary>
-    /// Class Message2.
+    /// Class ChannelPlayer.
     /// </summary>
-    public class Message2
+    public class ChannelPlayer
     {
         /// <summary>
-        /// Gets or sets the type.
+        /// Gets or sets the vod.
         /// </summary>
-        /// <value>The type.</value>
-        public string type { get; set; }
+        /// <value>The vod.</value>
+        public string vod { get; set; }
         /// <summary>
-        /// Gets or sets the data.
+        /// Gets or sets the RTMP.
         /// </summary>
-        /// <value>The data.</value>
-        public string data { get; set; }
+        /// <value>The RTMP.</value>
+        public string rtmp { get; set; }
         /// <summary>
-        /// Gets or sets the text.
+        /// Gets or sets the FTL.
         /// </summary>
-        /// <value>The text.</value>
-        public string text { get; set; }
+        /// <value>The FTL.</value>
+        public string ftl { get; set; }
     }
 }

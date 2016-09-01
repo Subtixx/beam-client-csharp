@@ -1,31 +1,97 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : beam_client_csharp
+// Author           : Subtixx
+// Created          : 08-31-2016
+//
+// Last Modified By : Subtixx
+// Last Modified On : 09-01-2016
+// ***********************************************************************
+// <copyright file="BeamEventHandler.cs" company="Flying Penguin">
+//     Copyright ©  2016
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using beam_client_csharp.Messages;
 
 namespace beam_client_csharp.EventHandlers
 {
+    /// <summary>
+    /// Enum EventHandlerTypes
+    /// </summary>
     public enum EventHandlerTypes
     {
+        /// <summary>
+        /// The welcome event
+        /// </summary>
         WelcomeEvent,
+        /// <summary>
+        /// The chat message event
+        /// </summary>
         ChatMessageEvent,
+        /// <summary>
+        /// The delete message
+        /// </summary>
         DeleteMessage,
+        /// <summary>
+        /// The purge message
+        /// </summary>
         PurgeMessage,
+        /// <summary>
+        /// The clear messages
+        /// </summary>
         ClearMessages,
+        /// <summary>
+        /// The user update
+        /// </summary>
         UserUpdate,
+        /// <summary>
+        /// The user timeout
+        /// </summary>
         UserTimeout,
+        /// <summary>
+        /// The user join
+        /// </summary>
         UserJoin,
+        /// <summary>
+        /// The user leave
+        /// </summary>
         UserLeave,
+        /// <summary>
+        /// The poll start
+        /// </summary>
         PollStart,
+        /// <summary>
+        /// The poll end
+        /// </summary>
         PollEnd
     }
 
+    /// <summary>
+    /// Class BeamEventHandler.
+    /// </summary>
     public static class BeamEventHandler
     {
+        /// <summary>
+        /// Delegate HandleEventFunc
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="underlayingMessage">The underlaying message.</param>
         public delegate void HandleEventFunc(BeamEventMessage message, string underlayingMessage);
 
+        /// <summary>
+        /// The _event handlers
+        /// </summary>
         private static readonly Dictionary<HandleEventFunc, EventHandlerTypes> _eventHandlers =
             new Dictionary<HandleEventFunc, EventHandlerTypes>();
 
+        /// <summary>
+        /// Handles the event.
+        /// </summary>
+        /// <param name="eventMessage">The event message.</param>
+        /// <param name="underlayingMessage">The underlaying message.</param>
+        /// <exception cref="System.NotImplementedException"></exception>
         public static void HandleEvent(BeamEventMessage eventMessage, string underlayingMessage)
         {
             switch (eventMessage.@event)
@@ -83,7 +149,7 @@ namespace beam_client_csharp.EventHandlers
         }
 
         /// <summary>
-        ///     Relays the event to all event functions.
+        /// Relays the event to all event functions.
         /// </summary>
         /// <param name="eventType">Type of the event.</param>
         /// <param name="eventMessage">The event message.</param>
@@ -97,7 +163,7 @@ namespace beam_client_csharp.EventHandlers
         }
 
         /// <summary>
-        ///     Adds the event handler.
+        /// Adds the event handler.
         /// </summary>
         /// <param name="handlerType">Type of the handler.</param>
         /// <param name="function">The function.</param>
@@ -107,7 +173,7 @@ namespace beam_client_csharp.EventHandlers
         }
 
         /// <summary>
-        ///     Removes the event handler.
+        /// Removes the event handler.
         /// </summary>
         /// <param name="function">The function.</param>
         public static void RemoveEventHandler(HandleEventFunc function)
@@ -115,6 +181,9 @@ namespace beam_client_csharp.EventHandlers
             _eventHandlers.Remove(function);
         }
 
+        /// <summary>
+        /// Sends the login event.
+        /// </summary>
         private static void SendLoginEvent()
         {
             var args = new List<string> {BeamChat.ChannelId};
@@ -135,7 +204,7 @@ namespace beam_client_csharp.EventHandlers
                 if (user == null)
                     return;
 
-                var chat = beamWeb.ChatInfo(user.channel.id).Result;
+                var chat = beamWeb.GetChatInformation(user.channel.id).Result;
                 if (string.IsNullOrEmpty(chat.authkey))
                     return;
 

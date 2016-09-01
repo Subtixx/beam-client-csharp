@@ -15,10 +15,10 @@ namespace beam_client_csharp.Tests
         public void Test_LoginFail()
         {
             BeamWeb bWeb = new BeamWeb();
-            Task<BeamUser.BeamUser> res = bWeb.Authenticate("travis-ci", "travis-ci");
+            Task<BeamUser.BeamUser> res = bWeb.Authenticate("app-veyor", "app-veyor");
             if (res.Result == null)
             {
-                Assert.Pass("BeamWeb Login fail test success");
+                Assert.Pass("BeamWeb Login fail test success\n");
             }
         }
 
@@ -26,15 +26,15 @@ namespace beam_client_csharp.Tests
         public void Test_ChatInfo()
         {
             BeamWeb bWeb = new BeamWeb();
-            Task<BeamChatInfo> res = bWeb.ChatInfo(197242);
+            Task<BeamChatInfo> res = bWeb.GetChatInformation(197242);
             BeamChatInfo chatInfo = res.Result;
 
             if (chatInfo == null || chatInfo.endpoints.Count == 0)
             {
-                Assert.Fail("Could not get chatinfo");
+                Assert.Fail("Could not get chatinfo\n");
             }
 
-            Assert.Pass("Got Chatinfo!");
+            Assert.Pass("Got Chatinfo!\n");
         }
     }
 }

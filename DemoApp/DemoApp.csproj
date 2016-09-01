@@ -91,6 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="achievements.json" />
     <None Include="App.config" />
     <None Include="chatinfo.json" />
     <None Include="chatmsg.json" />
@@ -102,6 +103,9 @@
       <Project>{022e8de1-5075-4a72-8a37-da93d478ab36}</Project>
       <Name>beam-client-csharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="listchannels.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
