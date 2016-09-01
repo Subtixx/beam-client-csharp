@@ -213,3 +213,5 @@ ModelManifest.xml
 *.sln.GhostDoc.xml
 *.tss
 /DemoApp/loginresponse.json
+/DemoApp/chatinfo.json
+/DemoApp/chatmsg.json

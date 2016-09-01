@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace beam_client_csharp
+namespace beam_client_csharp.BeamUser
 {
     public class Social
     {

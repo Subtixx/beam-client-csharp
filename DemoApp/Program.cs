@@ -6,6 +6,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using beam_client_csharp;
+using beam_client_csharp.BeamEventMessages.ChatMessage;
+using beam_client_csharp.BeamUser;
+using beam_client_csharp.EventHandlers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace DemoApp
@@ -30,9 +34,28 @@ namespace DemoApp
                 throw new ArgumentException("Login incorrect?");
             }
 
+            BeamChatInfo chatInfo = bWeb.ChatInfo(user.channel.id).Result;
+            if (chatInfo == null || chatInfo.endpoints.Count == 0)
+            {
+                throw new ArgumentException("Channel Id incorrect?");
+            }
+
             Console.WriteLine("UserID: {0}, ChannelID: {1}", user.id, user.channel.id);
 
+            BeamChat bChat = new BeamChat();
+            bChat.SetupWebsocket(chatInfo.endpoints[0]);
+            bChat.SetupCredentials(user.id, user.channel.id, chatInfo.authkey);
+            bChat.Connect();
+
+            BeamEventHandler.AddEventHandler(EventHandlerTypes.ChatMessageEvent, (message, underlayingMessage) =>
+            {
+                BeamEventChatMessage chatMessage = JsonConvert.DeserializeObject<BeamEventChatMessage>(underlayingMessage);
+                Console.WriteLine("Received Chat message: {0}", chatMessage.data.message.message[0].text);
+            });
+
             Console.ReadKey();
+
+            bChat.Disconnect();
             /*BeamChat beamChat = new BeamChat();
 
             beamChat.SetupCredentials("");
