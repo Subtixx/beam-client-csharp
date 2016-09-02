@@ -1,0 +1,51 @@
+﻿[{
+	"slug": "alpha-user",
+	"name": "Alpha",
+	"description": "Be a part of Beam’s Alpha testing phase.",
+	"sparks": 0
+}, {
+	"slug": "beam-me-up",
+	"name": "BeamMeUp",
+	"description": "Thanks for signing up for Beam!",
+	"sparks": 0
+}, {
+	"slug": "beta-user",
+	"name": "Beta",
+	"description": "Be a part of Beam’s Beta user group.",
+	"sparks": 0
+}, {
+	"slug": "followers-gold",
+	"name": "Followers Gold",
+	"description": "Have at least one thousands followers.",
+	"sparks": 0
+}, {
+	"slug": "followers-plat",
+	"name": "Followers Platinum",
+	"description": "Have at least ten thousand followers.",
+	"sparks": 0
+}, {
+	"slug": "followers-silver",
+	"name": "Followers Silver",
+	"description": "Have at least one hundred followers.",
+	"sparks": 0
+}, {
+	"slug": "helper-gold",
+	"name": "Helper Gold",
+	"description": "Be modded in 5 channels.",
+	"sparks": 0
+}, {
+	"slug": "helper-silver",
+	"name": "Helper Silver",
+	"description": "Be modded in at least one channel.",
+	"sparks": 0
+}, {
+	"slug": "stalker-gold",
+	"name": "Stalker Gold",
+	"description": "Follow at least one hundred channels.",
+	"sparks": 0
+}, {
+	"slug": "stalker-silver",
+	"name": "Stalker Silver",
+	"description": "Follow 10 channels.",
+	"sparks": 0
+}]

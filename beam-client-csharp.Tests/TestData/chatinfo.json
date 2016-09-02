@@ -1,0 +1,25 @@
+﻿{
+	"endpoints": [
+		"wss://chat1-dal.beam.pro:443",
+		"wss://chat3-dal.beam.pro:443",
+		"wss://chat2-dal.beam.pro:443"
+	],
+	"authkey": "strippedforobviousreasons",
+	"permissions": [
+		"change_ban",
+		"edit_options",
+		"change_role",
+		"bypass_links",
+		"bypass_slowchat",
+		"clear_messages",
+		"remove_message",
+		"poll_start",
+		"giveaway_start",
+		"timeout",
+		"view_deleted",
+		"chat",
+		"connect",
+		"whisper",
+		"poll_vote"
+	]
+}
