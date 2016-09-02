@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace beam_client_csharp.BeamUser
+namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
     /// Class ChannelPlayer.

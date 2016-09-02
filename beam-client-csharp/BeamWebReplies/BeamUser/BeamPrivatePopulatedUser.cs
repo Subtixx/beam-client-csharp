@@ -6,7 +6,7 @@
 // Last Modified By : Subtixx
 // Last Modified On : 09-02-2016
 // ***********************************************************************
-// <copyright file="BeamExpandedChannel.cs" company="Flying Penguin">
+// <copyright file="BeamPrivatePopulatedUser.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
@@ -17,37 +17,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace beam_client_csharp.BeamWebReplies.BeamChannel
+namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
-    /// Class BeamExpandedChannel.
+    /// A fully populater user with channel, preferences, groups and private details.
     /// </summary>
-    public class BeamExpandedChannel : BeamChannelAdvanced
+    public class BeamPrivatePopulatedUser : BeamPrivateUser
     {
         /// <summary>
-        /// A resource object representing the thumbnail.
-        /// Nullable
+        /// The users channel.
         /// </summary>
-        public Resource thumbnail;
+        public BeamChannel.BeamChannel channel;
         /// <summary>
-        /// A resource object representing the cover.
-        /// Nullable
+        /// The global user groups.
         /// </summary>
-        public Resource cover;
+        public List<UserGroup> groups;
         /// <summary>
-        /// A resource object representing the badge.
-        /// Nullable
+        /// The preferences the user has.
         /// </summary>
-        public Resource badge;
+        public UserPreferences preferences;
         /// <summary>
-        /// The cache
+        /// Two factor related data.
         /// </summary>
-        public List<object> cache;
-
-        /// <summary>
-        /// The channel preferences.
-        /// </summary>
-        [Obsolete]
-        public ChannelPreferences preferences;
+        public object twoFactor;
     }
 }

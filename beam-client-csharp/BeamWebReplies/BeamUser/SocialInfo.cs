@@ -11,39 +11,45 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 
-namespace beam_client_csharp.BeamUser
+namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
     /// Class Social.
     /// </summary>
-    public class Social
+    public class SocialInfo
     {
-        /// <summary>
-        /// Gets or sets the player.
-        /// </summary>
-        /// <value>The player.</value>
-        public string player { get; set; }
         /// <summary>
         /// Gets or sets the twitter.
         /// </summary>
-        /// <value>The twitter.</value>
+        /// <value>Twitter profile URL.</value>
         public string twitter { get; set; }
+        /// <summary>
+        /// Gets or sets the facebook.
+        /// </summary>
+        /// <value>Facebook profile URL.</value>
+        public string facebook { get; set; }
         /// <summary>
         /// Gets or sets the youtube.
         /// </summary>
-        /// <value>The youtube.</value>
+        /// <value>Youtube profile URL.</value>
         public string youtube { get; set; }
         /// <summary>
-        /// Gets or sets the verified.
+        /// Gets or sets the player.
         /// </summary>
-        /// <value>The verified.</value>
-        public List<string> verified { get; set; }
+        /// <value>Player.me profile URL.</value>
+        public string player { get; set; }
         /// <summary>
         /// Gets or sets the discord.
         /// </summary>
-        /// <value>The discord.</value>
+        /// <value>Discord username and tag.</value>
         public string discord { get; set; }
+        /// <summary>
+        /// Gets or sets the verified.
+        /// </summary>
+        /// <value>A list of social keys which have been verified via linking the Beam account with the account on the corresponding external service.</value>
+        public List<string> verified { get; set; }
     }
 }

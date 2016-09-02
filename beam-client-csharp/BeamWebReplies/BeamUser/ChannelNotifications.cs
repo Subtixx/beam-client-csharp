@@ -4,16 +4,17 @@
 // Created          : 08-31-2016
 //
 // Last Modified By : Subtixx
-// Last Modified On : 09-01-2016
+// Last Modified On : 09-02-2016
 // ***********************************************************************
 // <copyright file="ChannelNotifications.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 
-namespace beam_client_csharp.BeamUser
+namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
     /// Class ChannelNotifications.

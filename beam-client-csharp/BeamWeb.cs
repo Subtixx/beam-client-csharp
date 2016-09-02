@@ -20,6 +20,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using beam_client_csharp.BeamWebReplies.BeamAnalytic;
 using beam_client_csharp.BeamWebReplies.BeamChannel;
+using beam_client_csharp.BeamWebReplies.BeamUser;
 using beam_client_csharp.Utils;
 using Newtonsoft.Json;
 
@@ -61,7 +62,7 @@ namespace beam_client_csharp
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
         /// <returns>Task&lt;BeamUser.BeamUser&gt;.</returns>
-        public async Task<BeamUser.BeamUser> Authenticate(string username, string password)
+        public async Task<BeamPrivatePopulatedUser> Authenticate(string username, string password)
         {
             var values = new Dictionary<string, string>
             {
@@ -73,7 +74,7 @@ namespace beam_client_csharp
             var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(loginResult);
             return result.ContainsKey("statusCode")
                 ? null
-                : JsonConvert.DeserializeObject<BeamUser.BeamUser>(loginResult);
+                : JsonConvert.DeserializeObject<BeamPrivatePopulatedUser>(loginResult);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace beam_client_csharp
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;BeamChatInfo&gt;.</returns>
-        public async Task<BeamChatInfo> GetChatInformation(int channelId)
+        public async Task<BeamChatInfo> GetChatInformation(uint channelId)
         {
             return JsonConvert.DeserializeObject<BeamChatInfo>(await Call_API($"chats/{channelId}"));
         }
@@ -269,7 +270,7 @@ namespace beam_client_csharp
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;BeamChannel.BeamChannel&gt;.</returns>
-        public async Task<BeamChannel> GetChannel(int channelId)
+        public async Task<BeamChannel> GetChannel(uint channelId)
         {
             return JsonConvert.DeserializeObject<BeamChannel>(await Call_API($"channels/{channelId}"));
         }
@@ -279,7 +280,7 @@ namespace beam_client_csharp
         /// </summary>
         /// <param name="channelIdOrToken">The channel identifier or token.</param>
         /// <returns>Task&lt;BeamChannel.BeamChannel&gt;.</returns>
-        public async Task<BeamChannel> GetChannelDetails(int channelIdOrToken)
+        public async Task<BeamChannel> GetChannelDetails(uint channelIdOrToken)
         {
             return JsonConvert.DeserializeObject<BeamChannel>(await Call_API($"channels/{channelIdOrToken}/details"));
         }
@@ -294,7 +295,7 @@ namespace beam_client_csharp
         /// <param name="from">From (isoDate).</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamViewerCount&gt;&gt;.</returns>
-        public async Task<List<BeamViewerAnalytic>> GetViewers(int channelId, string from, string to = null)
+        public async Task<List<BeamViewerAnalytic>> GetViewers(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -309,7 +310,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamViewerMetricAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamViewerMetricAnalytic>> GetViewersMetrics(int channelId, string from, string to = null)
+        public async Task<List<BeamViewerMetricAnalytic>> GetViewersMetrics(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -323,7 +324,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamStreamSessionAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamStreamSessionAnalytic>> GetStreamSessions(int channelId, string from, string to = null)
+        public async Task<List<BeamStreamSessionAnalytic>> GetStreamSessions(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -338,7 +339,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamStreamHostAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamStreamHostAnalytic>> GetStreamHosts(int channelId, string from, string to = null)
+        public async Task<List<BeamStreamHostAnalytic>> GetStreamHosts(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -353,7 +354,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamSubscriptionAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamSubscriptionAnalytic>> GetSubscriptions(int channelId, string from, string to = null)
+        public async Task<List<BeamSubscriptionAnalytic>> GetSubscriptions(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -368,7 +369,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamFollowerAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamFollowerAnalytic>> GetFollowers(int channelId, string from, string to = null)
+        public async Task<List<BeamFollowerAnalytic>> GetFollowers(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -383,7 +384,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamFollowerAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamFollowerAnalytic>> GetSparksSpent(int channelId, string from, string to = null)
+        public async Task<List<BeamFollowerAnalytic>> GetSparksSpent(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -398,7 +399,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamEmojiRankAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamEmojiRankAnalytic>> GetEmojiRanks(int channelId, string from, string to = null)
+        public async Task<List<BeamEmojiRankAnalytic>> GetEmojiRanks(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -413,7 +414,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamEmojiRankAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamEmojiRankAnalytic>> GetEmojiUsage(int channelId, string from, string to = null)
+        public async Task<List<BeamEmojiRankAnalytic>> GetEmojiUsage(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -428,7 +429,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamGameRankAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamGameRankAnalytic>> GetGameRanks(int channelId, string from, string to = null)
+        public async Task<List<BeamGameRankAnalytic>> GetGameRanks(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -443,7 +444,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamGameRankAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamGameRankAnalytic>> GetGlobalGameRanks(int channelId, string from, string to = null)
+        public async Task<List<BeamGameRankAnalytic>> GetGlobalGameRanks(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -458,7 +459,7 @@ namespace beam_client_csharp
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
         /// <returns>Task&lt;List&lt;BeamSubRevenueAnalytic&gt;&gt;.</returns>
-        public async Task<List<BeamSubRevenueAnalytic>> GetSubRevenue(int channelId, string from, string to = null)
+        public async Task<List<BeamSubRevenueAnalytic>> GetSubRevenue(uint channelId, string from, string to = null)
         {
             if (to == null)
                 to = DateTime.UtcNow.ToString("o");
@@ -474,7 +475,7 @@ namespace beam_client_csharp
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <exception cref="NotImplementedException"></exception>
-        public void SetBadge(int channelId)
+        public void SetBadge(uint channelId)
         {
             // Needs api to upload things.
             // See https://dev.beam.pro/rest.html#channels__channelId__badge_post
@@ -495,7 +496,7 @@ namespace beam_client_csharp
         /// <param name="fields">The fields.</param>
         /// <param name="order">The order.</param>
         /// <returns>Task&lt;List&lt;BeamChannel&gt;&gt;.</returns>
-        public async Task<List<BeamChannel>> ListFollowers(int channelId, int page = 1, int limit = 25, string where = "",
+        public async Task<List<BeamChannel>> ListFollowers(uint channelId, int page = 1, int limit = 25, string where = "",
             string fields = "", string order = "")
         {
             if (limit > 25)
@@ -512,7 +513,7 @@ namespace beam_client_csharp
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
         // This currently has no sample of a response.
-        public async Task<string> FollowChannel(int channelId)
+        public async Task<string> FollowChannel(uint channelId)
         {
             return await Call_API($"channels/{channelId}/follow", null, HttpMethod.Put);
         }

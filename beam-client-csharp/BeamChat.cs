@@ -190,7 +190,7 @@ namespace beam_client_csharp
         /// <param name="userId">The user unique identifier</param>
         /// <param name="channelId">The channel unique identifier</param>
         /// <param name="authKey">The authentication key.</param>
-        public void SetupCredentials(int userId, int channelId, string authKey)
+        public void SetupCredentials(uint userId, uint channelId, string authKey)
         {
             UserId = userId.ToString();
             ChannelId = channelId.ToString();

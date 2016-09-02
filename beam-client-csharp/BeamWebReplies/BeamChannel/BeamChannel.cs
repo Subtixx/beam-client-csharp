@@ -42,8 +42,9 @@ namespace beam_client_csharp.BeamWebReplies.BeamChannel
 
         /// <summary>
         /// The FTL stream id.
+        /// This is actually specified as uint. But has a value of -1 when not using FTL
         /// </summary>
-        public uint ftl;
+        public int ftl;
 
         /// <summary>
         /// Indicates if the channel has vod saved.
