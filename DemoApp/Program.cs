@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using beam_client_csharp;
+using beam_client_csharp.BeamEventMessages;
 using beam_client_csharp.BeamEventMessages.ChatMessage;
 using beam_client_csharp.EventHandlers;
 using Newtonsoft.Json;
@@ -14,7 +16,7 @@ namespace DemoApp
 
         private static void Main(string[] args)
         {
-            loadConfig();
+            LoadConfig();
 
             if (!_configDictionary.ContainsKey("username") ||
                 !_configDictionary.ContainsKey("password"))
@@ -41,6 +43,18 @@ namespace DemoApp
             bChat.SetupCredentials(user.id, user.channel.id, chatInfo.authkey);
             bChat.Connect();
 
+            BeamEventHandler.AddEventHandler(EventHandlerTypes.UserJoin, ((message, underlayingMessage) =>
+            {
+                var userJoinEv = JsonConvert.DeserializeObject<BeamEventUserJoin>(underlayingMessage);
+                Console.WriteLine("User joined: " + userJoinEv.username);
+            }));
+
+            BeamEventHandler.AddEventHandler(EventHandlerTypes.UserLeave, ((message, underlayingMessage) =>
+            {
+                var userLeaveEv = JsonConvert.DeserializeObject<BeamEventUserLeave>(underlayingMessage);
+                Console.WriteLine("User left: " + userLeaveEv.username);
+            }));
+
             BeamEventHandler.AddEventHandler(EventHandlerTypes.ChatMessageEvent, (message, underlayingMessage) =>
             {
                 var chatMessage = JsonConvert.DeserializeObject<BeamEventChatMessage>(underlayingMessage);
@@ -65,16 +79,20 @@ namespace DemoApp
             beamChat.websocket_MessageReceived(null, new MessageReceivedEventArgs("{\"type\":\"event\",\"event\":\"WelcomeEvent\",\"data\":{\"server\":\"891c12de-d4f8-4b4f-971f-5e69b6b65075\"}}"));*/
         }
 
-        private static void loadConfig()
+        private static void LoadConfig()
         {
+            if (!File.Exists("config.xml"))
+                return;
             _configDictionary = new Dictionary<string, string>();
 
             var xdoc = new XmlDocument();
             xdoc.Load("config.xml");
-            foreach (XmlAttribute xnn in xdoc.ChildNodes[1].Attributes)
-            {
-                _configDictionary.Add(xnn.Name, xnn.Value);
-            }
+            var xmlAttributeCollection = xdoc.ChildNodes[1].Attributes;
+            if (xmlAttributeCollection != null)
+                foreach (XmlAttribute xnn in xmlAttributeCollection)
+                {
+                    _configDictionary.Add(xnn.Name, xnn.Value);
+                }
         }
     }
 }

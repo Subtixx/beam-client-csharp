@@ -224,8 +224,9 @@ namespace beam_client_csharp
                             $"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
 #if !DEBUG
                             throw new Exception($"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
-#endif
+#else // Generate no warning on release build.
                             break;
+#endif
                         case HttpStatusCode.NoContent: // ?????
                             return "true";
                         case (HttpStatusCode)429: // API Rate limit

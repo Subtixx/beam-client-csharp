@@ -25,10 +25,6 @@ namespace beam_client_csharp.BeamWebReplies.BeamUser
     public class BeamPrivateUser : BeamUser
     {
         /// <summary>
-        /// The users email address.
-        /// </summary>
-        public string email;
-        /// <summary>
         /// The users password.
         /// minLength: 4
         /// </summary>
