@@ -12,14 +12,20 @@
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
+using beam_client_csharp.BeamWebReplies.BeamChannel;
 
 namespace beam_client_csharp.BeamUser
 {
     /// <summary>
     /// Class BeamUser.
     /// </summary>
-    public class BeamUser
+    public class BeamUser : BeamTimestamped
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        public int id { get; set; }
         /// <summary>
         /// Gets or sets the level.
         /// </summary>
@@ -30,11 +36,6 @@ namespace beam_client_csharp.BeamUser
         /// </summary>
         /// <value>The social.</value>
         public Social social { get; set; }
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>The identifier.</value>
-        public int id { get; set; }
         /// <summary>
         /// Gets or sets the username.
         /// </summary>
@@ -75,21 +76,6 @@ namespace beam_client_csharp.BeamUser
         /// </summary>
         /// <value>The primary team.</value>
         public int primaryTeam { get; set; }
-        /// <summary>
-        /// Gets or sets the created at.
-        /// </summary>
-        /// <value>The created at.</value>
-        public string createdAt { get; set; }
-        /// <summary>
-        /// Gets or sets the updated at.
-        /// </summary>
-        /// <value>The updated at.</value>
-        public string updatedAt { get; set; }
-        /// <summary>
-        /// Gets or sets the deleted at.
-        /// </summary>
-        /// <value>The deleted at.</value>
-        public object deletedAt { get; set; }
         /// <summary>
         /// Gets or sets the groups.
         /// </summary>

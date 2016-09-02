@@ -4,14 +4,15 @@
 // Created          : 09-01-2016
 //
 // Last Modified By : Subtixx
-// Last Modified On : 09-01-2016
+// Last Modified On : 09-02-2016
 // ***********************************************************************
 // <copyright file="BeamChannel.cs" company="Flying Penguin">
 //     Copyright ©  2016
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.BeamChannel
+
+namespace beam_client_csharp.BeamWebReplies.BeamChannel
 {
     /// <summary>
     /// Class BeamChannel.
@@ -19,184 +20,126 @@ namespace beam_client_csharp.BeamChannel
     public class BeamChannel
     {
         /// <summary>
-        /// Gets or sets the tetris game identifier.
+        /// The target audience of the channel.
+        /// string(family, teen, 18+)
         /// </summary>
-        /// <value>The tetris game identifier.</value>
-        public int? tetrisGameId { get; set; }
+        public string audience;
+
         /// <summary>
-        /// Gets or sets the identifier.
+        /// The ID of the cover resource.
         /// </summary>
-        /// <value>The identifier.</value>
-        public int id { get; set; }
+        public uint? coverId;
+
         /// <summary>
-        /// Gets or sets the user identifier.
+        /// The description of the channel, can contain HTML.
         /// </summary>
-        /// <value>The user identifier.</value>
-        public int userId { get; set; }
+        public string description;
+
         /// <summary>
-        /// Gets or sets the token.
+        /// Indicates if the channel is featured.
         /// </summary>
-        /// <value>The token.</value>
-        public string token { get; set; }
+        public bool featured;
+
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is online.
+        /// The FTL stream id.
         /// </summary>
-        /// <value><c>true</c> if online; otherwise, <c>false</c>.</value>
-        public bool online { get; set; }
+        public uint ftl;
+
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is featured.
+        /// Indicates if the channel has vod saved.
         /// </summary>
-        /// <value><c>true</c> if featured; otherwise, <c>false</c>.</value>
-        public bool featured { get; set; }
+        public bool hasVod;
+
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is partnered.
+        /// The unique ID of the channel.
         /// </summary>
-        /// <value><c>true</c> if partnered; otherwise, <c>false</c>.</value>
-        public bool partnered { get; set; }
+        public uint id;
+
         /// <summary>
-        /// Gets or sets the transcoding profile identifier.
+        /// Indicates if that channel is interactive.
         /// </summary>
-        /// <value>The transcoding profile identifier.</value>
-        public int? transcodingProfileId { get; set; }
+        public bool interactive;
+
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is suspended.
+        /// The ID of the interactive game used.
         /// </summary>
-        /// <value><c>true</c> if suspended; otherwise, <c>false</c>.</value>
-        public bool suspended { get; set; }
+        public uint? interactiveGameId;
+
         /// <summary>
-        /// Gets or sets the name.
+        /// ISO 639 language id.
+        /// Nullable on Beam
         /// </summary>
-        /// <value>The name.</value>
-        public string name { get; set; }
+        public string languageId;
+
+
         /// <summary>
-        /// Gets or sets the audience.
+        /// The title of the channel.
         /// </summary>
-        /// <value>The audience.</value>
-        public string audience { get; set; }
+        public string name;
+
         /// <summary>
-        /// Gets or sets the viewers total.
+        /// Amount of followers.
         /// </summary>
-        /// <value>The viewers total.</value>
-        public int viewersTotal { get; set; }
+        public uint numFollower;
+
         /// <summary>
-        /// Gets or sets the viewers current.
+        /// Indicates if the channel is active.
         /// </summary>
-        /// <value>The viewers current.</value>
-        public int viewersCurrent { get; set; }
+        public bool online;
+
         /// <summary>
-        /// Gets or sets the number followers.
+        /// Indicates if the channel is partnered.
         /// </summary>
-        /// <value>The number followers.</value>
-        public int numFollowers { get; set; }
+        public bool partnered;
+
         /// <summary>
-        /// Gets or sets the description.
+        /// Indicates if the channel is suspended.
         /// </summary>
-        /// <value>The description.</value>
-        public string description { get; set; }
+        public bool suspended;
+
         /// <summary>
-        /// Gets or sets the type identifier.
+        /// The ID of the interactive game used.
         /// </summary>
-        /// <value>The type identifier.</value>
-        public int? typeId { get; set; }
+        public uint? tetrisGameId;
+
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamChannel"/> is interactive.
+        /// The resource ID of the thumbnail.
         /// </summary>
-        /// <value><c>true</c> if interactive; otherwise, <c>false</c>.</value>
-        public bool interactive { get; set; }
+        public uint? thumbnailId;
+
         /// <summary>
-        /// Gets or sets the interactive game identifier.
+        /// The name and url of the channel.
         /// </summary>
-        /// <value>The interactive game identifier.</value>
-        public int? interactiveGameId { get; set; }
+        public string token;
+
         /// <summary>
-        /// Gets or sets the FTL.
+        /// The id of the transcoding profile.
         /// </summary>
-        /// <value>The FTL.</value>
-        public int ftl { get; set; }
+        public uint? transcodingProfileId;
+
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has vod.
+        /// The ID of the game type.
         /// </summary>
-        /// <value><c>true</c> if this instance has vod; otherwise, <c>false</c>.</value>
-        public bool hasVod { get; set; }
+        public uint? typeId;
+
         /// <summary>
-        /// Gets or sets the language identifier.
+        /// The ID of the user owning the channel.
         /// </summary>
-        /// <value>The language identifier.</value>
-        public object languageId { get; set; }
+        public uint userId;
+
         /// <summary>
-        /// Gets or sets the cover identifier.
+        /// Amount of current viewers.
         /// </summary>
-        /// <value>The cover identifier.</value>
-        public int? coverId { get; set; }
+        public uint viewersCurrent;
+
         /// <summary>
-        /// Gets or sets the thumbnail identifier.
+        /// Amount of unique viewers that ever viewed this channel.
         /// </summary>
-        /// <value>The thumbnail identifier.</value>
-        public int? thumbnailId { get; set; }
+        public uint viewersTotal;
+
         /// <summary>
-        /// Gets or sets the badge identifier.
+        /// Indicates if the channel has vod recording enabled.
         /// </summary>
-        /// <value>The badge identifier.</value>
-        public object badgeId { get; set; }
-        /// <summary>
-        /// Gets or sets the hostee identifier.
-        /// </summary>
-        /// <value>The hostee identifier.</value>
-        public object hosteeId { get; set; }
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance has transcodes.
-        /// </summary>
-        /// <value><c>true</c> if this instance has transcodes; otherwise, <c>false</c>.</value>
-        public bool hasTranscodes { get; set; }
-        /// <summary>
-        /// Gets or sets a value indicating whether [vods enabled].
-        /// </summary>
-        /// <value><c>true</c> if [vods enabled]; otherwise, <c>false</c>.</value>
-        public bool vodsEnabled { get; set; }
-        /// <summary>
-        /// Gets or sets the created at.
-        /// </summary>
-        /// <value>The created at.</value>
-        public string createdAt { get; set; }
-        /// <summary>
-        /// Gets or sets the updated at.
-        /// </summary>
-        /// <value>The updated at.</value>
-        public string updatedAt { get; set; }
-        /// <summary>
-        /// Gets or sets the deleted at.
-        /// </summary>
-        /// <value>The deleted at.</value>
-        public object deletedAt { get; set; }
-        /// <summary>
-        /// Gets or sets the thumbnail.
-        /// </summary>
-        /// <value>The thumbnail.</value>
-        public Thumbnail thumbnail { get; set; }
-        /// <summary>
-        /// Gets or sets the cover.
-        /// </summary>
-        /// <value>The cover.</value>
-        public Cover cover { get; set; }
-        /// <summary>
-        /// Gets or sets the badge.
-        /// </summary>
-        /// <value>The badge.</value>
-        public object badge { get; set; }
-        /// <summary>
-        /// Gets or sets the type.
-        /// </summary>
-        /// <value>The type.</value>
-        public Type type { get; set; }
-        /// <summary>
-        /// Gets or sets the preferences.
-        /// </summary>
-        /// <value>The preferences.</value>
-        public Preferences preferences { get; set; }
-        /// <summary>
-        /// Gets or sets the user.
-        /// </summary>
-        /// <value>The user.</value>
-        public User user { get; set; }
+        public bool vodsEnabled;
     }
 }

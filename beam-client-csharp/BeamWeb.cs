@@ -4,7 +4,7 @@
 // Created          : 08-31-2016
 //
 // Last Modified By : Subtixx
-// Last Modified On : 09-01-2016
+// Last Modified On : 09-02-2016
 // ***********************************************************************
 // <copyright file="BeamWeb.cs" company="Flying Penguin">
 //     Copyright ©  2016
@@ -19,6 +19,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using beam_client_csharp.BeamWebReplies.BeamAnalytic;
+using beam_client_csharp.BeamWebReplies.BeamChannel;
 using beam_client_csharp.Utils;
 using Newtonsoft.Json;
 
@@ -97,8 +98,8 @@ namespace beam_client_csharp
         /// <summary>
         /// Creates the announcement.
         /// </summary>
-        /// <exception cref="System.NotImplementedException"></exception>
         /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="System.NotImplementedException"></exception>
         [Obsolete("This method is not implemented", false)]
         public void CreateAnnouncement()
         {
@@ -126,6 +127,7 @@ namespace beam_client_csharp
         /// <param name="values">The values.</param>
         /// <param name="method">The method.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
+        /// <exception cref="NotImplementedException">$Method {method.Method} is not implemented!</exception>
         private async Task<string> Call_API(string subUrl, Dictionary<string, string> values = null, HttpMethod method = null)
         {
             if (method == null)
@@ -252,13 +254,13 @@ namespace beam_client_csharp
         /// <param name="fields">The fields.</param>
         /// <param name="order">The order.</param>
         /// <returns>Task&lt;List&lt;BeamChannel.BeamChannel&gt;&gt;.</returns>
-        public async Task<List<BeamChannel.BeamChannel>> ListChannels(int page = 1, int limit = 50, string where = "",
+        public async Task<List<BeamChannel>> ListChannels(int page = 1, int limit = 50, string where = "",
             string fields = "", string order = "")
         {
             if (limit > 50)
                 limit = 50;
             return
-                JsonConvert.DeserializeObject<List<BeamChannel.BeamChannel>>(
+                JsonConvert.DeserializeObject<List<BeamChannel>>(
                     await Call_API($"channels?page={page}&limit={limit}&where={where}&fields={fields}&order={order}"));
         }
 
@@ -267,9 +269,9 @@ namespace beam_client_csharp
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;BeamChannel.BeamChannel&gt;.</returns>
-        public async Task<BeamChannel.BeamChannel> GetChannel(int channelId)
+        public async Task<BeamChannel> GetChannel(int channelId)
         {
-            return JsonConvert.DeserializeObject<BeamChannel.BeamChannel>(await Call_API($"channels/{channelId}"));
+            return JsonConvert.DeserializeObject<BeamChannel>(await Call_API($"channels/{channelId}"));
         }
 
         /// <summary>
@@ -277,9 +279,9 @@ namespace beam_client_csharp
         /// </summary>
         /// <param name="channelIdOrToken">The channel identifier or token.</param>
         /// <returns>Task&lt;BeamChannel.BeamChannel&gt;.</returns>
-        public async Task<BeamChannel.BeamChannel> GetChannelDetails(int channelIdOrToken)
+        public async Task<BeamChannel> GetChannelDetails(int channelIdOrToken)
         {
-            return JsonConvert.DeserializeObject<BeamChannel.BeamChannel>(await Call_API($"channels/{channelIdOrToken}/details"));
+            return JsonConvert.DeserializeObject<BeamChannel>(await Call_API($"channels/{channelIdOrToken}/details"));
         }
         #endregion
 
@@ -467,6 +469,11 @@ namespace beam_client_csharp
 
         #region Misc Actions
 
+        /// <summary>
+        /// Sets the badge.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void SetBadge(int channelId)
         {
             // Needs api to upload things.
@@ -478,21 +485,37 @@ namespace beam_client_csharp
             await Call_API($"channels/{channelId}/badge", values);*/
         }
 
-        public async Task<List<BeamChannel.BeamChannel>> ListFollowers(int channelId, int page = 1, int limit = 25, string where = "",
+        /// <summary>
+        /// Lists the followers.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <param name="page">The page.</param>
+        /// <param name="limit">The limit.</param>
+        /// <param name="where">The where.</param>
+        /// <param name="fields">The fields.</param>
+        /// <param name="order">The order.</param>
+        /// <returns>Task&lt;List&lt;BeamChannel&gt;&gt;.</returns>
+        public async Task<List<BeamChannel>> ListFollowers(int channelId, int page = 1, int limit = 25, string where = "",
             string fields = "", string order = "")
         {
             if (limit > 25)
                 limit = 25;
             //follow 
             return
-                JsonConvert.DeserializeObject<List<BeamChannel.BeamChannel>>(
+                JsonConvert.DeserializeObject<List<BeamChannel>>(
                     await Call_API($"channels/{channelId}/follow?page={page}&limit={limit}&where={where}&fields={fields}&order={order}"));
         }
 
-        /*public async Task<> FollowChannel(int channelId)
+        /// <summary>
+        /// Follows the channel.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        // This currently has no sample of a response.
+        public async Task<string> FollowChannel(int channelId)
         {
-            
-        }*/
+            return await Call_API($"channels/{channelId}/follow", null, HttpMethod.Put);
+        }
         #endregion
     }
 }
