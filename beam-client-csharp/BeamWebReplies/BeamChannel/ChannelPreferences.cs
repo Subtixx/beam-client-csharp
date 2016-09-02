@@ -11,77 +11,84 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace beam_client_csharp.BeamWebReplies.BeamChannel
 {
     /// <summary>
-    /// Class ChannelPreferences.
+    ///     Class ChannelPreferences.
     /// </summary>
     public class ChannelPreferences
     {
         /// <summary>
-        /// The costream_allow
-        /// </summary>
-        public string costream_allow;
-        /// <summary>
-        /// The text used when sharing the stream.
-        /// The template parameter %URL% will be replaced with the share url.
-        /// The template parameter %USER% will be replaced with the sharers name.
-        /// Nullable
-        /// </summary>
-        public string sharetext;
-
-        /// <summary>
-        /// Specified whether links are allowed in the chat.
-        /// Nullable
+        ///     Specified whether links are allowed in the chat.
+        ///     Nullable
         /// </summary>
         public bool channel_links_allowed;
+
         /// <summary>
-        /// Specifies whether links are clickable in the chat.
+        ///     Specifies whether links are clickable in the chat.
         /// </summary>
         public bool channel_links_clickable;
+
         /// <summary>
-        /// Interval required between each chat message.
-        /// </summary>
-        public int channel_slowchat;
-        /// <summary>
-        /// The message to be used when a user subscribed to the channel.
-        /// The template parameter %USER% will be replaced with the subscribers name.
-        /// </summary>
-        public string channel_notify_subscribemessage;
-        /// <summary>
-        /// Indicates whether a notification should be shown upon subscription.
-        /// </summary>
-        public bool channel_notify_subscribe;
-        /// <summary>
-        /// The message to be used when a user followed the channel.
-        /// The template parameter "%USER%" will be replaced with the followers name.
-        /// </summary>
-        public string channel_notify_followmessage;
-        /// <summary>
-        /// Indicated whether a notification should be shown upon follow.
+        ///     Indicated whether a notification should be shown upon follow.
         /// </summary>
         public bool channel_notify_follow;
+
         /// <summary>
-        /// The text to be added to the subscription email.
+        ///     The message to be used when a user followed the channel.
+        ///     The template parameter "%USER%" will be replaced with the followers name.
         /// </summary>
-        public string channel_partner_submail;
+        public string channel_notify_followmessage;
+
         /// <summary>
-        /// Indicates whether to mute when the streamer opens his own stream.
+        ///     Indicates whether a notification should be shown upon subscription.
+        /// </summary>
+        public bool channel_notify_subscribe;
+
+        /// <summary>
+        ///     The message to be used when a user subscribed to the channel.
+        ///     The template parameter %USER% will be replaced with the subscribers name.
+        /// </summary>
+        public string channel_notify_subscribemessage;
+
+        /// <summary>
+        ///     Indicates whether to mute when the streamer opens his own stream.
         /// </summary>
         public bool channel_partner_muteOwn;
+
         /// <summary>
-        /// Indicates whether the tweet button should be shown.
+        ///     The text to be added to the subscription email.
         /// </summary>
-        public bool channel_tweet_enabled;
+        public string channel_partner_submail;
+
         /// <summary>
-        /// The message to be used when a user tweets about the channel.The template parameter %URL% will be replaced with the share url.
+        ///     Interval required between each chat message.
+        /// </summary>
+        public int channel_slowchat;
+
+        /// <summary>
+        ///     The message to be used when a user tweets about the channel.The template parameter %URL% will be replaced with the
+        ///     share url.
         /// </summary>
         public string channel_tweet_body;
+
+        /// <summary>
+        ///     Indicates whether the tweet button should be shown.
+        /// </summary>
+        public bool channel_tweet_enabled;
+
+        /// <summary>
+        ///     The costream_allow
+        /// </summary>
+        public string costream_allow;
+
+        /// <summary>
+        ///     The text used when sharing the stream.
+        ///     The template parameter %URL% will be replaced with the share url.
+        ///     The template parameter %USER% will be replaced with the sharers name.
+        ///     Nullable
+        /// </summary>
+        public string sharetext;
     }
 }

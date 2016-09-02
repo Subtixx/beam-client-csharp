@@ -11,17 +11,21 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using beam_client_csharp.Messages;
 
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+namespace beam_client_csharp.Messages.BeamEventMessages.ChatMessage
 {
     /// <summary>
-    /// Class BeamEventChatMessage.
+    ///     Class BeamEventChatMessage.
     /// </summary>
     public class BeamEventChatMessage : BeamMessage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamEventChatMessage"/> class.
+        ///     The event
+        /// </summary>
+        public string @event;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BeamEventChatMessage" /> class.
         /// </summary>
         public BeamEventChatMessage()
         {
@@ -30,12 +34,7 @@ namespace beam_client_csharp.BeamEventMessages.ChatMessage
         }
 
         /// <summary>
-        /// Gets or sets the event.
-        /// </summary>
-        /// <value>The event.</value>
-        public string @event { get; set; }
-        /// <summary>
-        /// Gets or sets the data.
+        ///     Gets or sets the data.
         /// </summary>
         /// <value>The data.</value>
         public Data data { get; set; }

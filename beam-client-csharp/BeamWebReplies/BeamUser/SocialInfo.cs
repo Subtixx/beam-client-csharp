@@ -17,39 +17,47 @@ using System.Collections.Generic;
 namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
-    /// Class Social.
+    ///     Class Social.
     /// </summary>
     public class SocialInfo
     {
         /// <summary>
-        /// Gets or sets the twitter.
+        ///     Gets or sets the twitter.
         /// </summary>
         /// <value>Twitter profile URL.</value>
         public string twitter { get; set; }
+
         /// <summary>
-        /// Gets or sets the facebook.
+        ///     Gets or sets the facebook.
         /// </summary>
         /// <value>Facebook profile URL.</value>
         public string facebook { get; set; }
+
         /// <summary>
-        /// Gets or sets the youtube.
+        ///     Gets or sets the youtube.
         /// </summary>
         /// <value>Youtube profile URL.</value>
         public string youtube { get; set; }
+
         /// <summary>
-        /// Gets or sets the player.
+        ///     Gets or sets the player.
         /// </summary>
         /// <value>Player.me profile URL.</value>
         public string player { get; set; }
+
         /// <summary>
-        /// Gets or sets the discord.
+        ///     Gets or sets the discord.
         /// </summary>
         /// <value>Discord username and tag.</value>
         public string discord { get; set; }
+
         /// <summary>
-        /// Gets or sets the verified.
+        ///     Gets or sets the verified.
         /// </summary>
-        /// <value>A list of social keys which have been verified via linking the Beam account with the account on the corresponding external service.</value>
+        /// <value>
+        ///     A list of social keys which have been verified via linking the Beam account with the account on the
+        ///     corresponding external service.
+        /// </value>
         public List<string> verified { get; set; }
     }
 }

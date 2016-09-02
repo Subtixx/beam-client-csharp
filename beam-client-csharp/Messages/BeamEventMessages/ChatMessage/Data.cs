@@ -11,42 +11,48 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+namespace beam_client_csharp.Messages.BeamEventMessages.ChatMessage
 {
     /// <summary>
-    /// Class Data.
+    ///     Class Data.
     /// </summary>
     public class Data
     {
         /// <summary>
-        /// Gets or sets the channel.
+        ///     Gets or sets the channel.
         /// </summary>
         /// <value>The channel.</value>
         public int channel { get; set; }
+
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         public string id { get; set; }
+
         /// <summary>
-        /// Gets or sets the user_name.
+        ///     Gets or sets the user_name.
         /// </summary>
         /// <value>The user_name.</value>
         public string user_name { get; set; }
+
         /// <summary>
-        /// Gets or sets the user_id.
+        ///     Gets or sets the user_id.
         /// </summary>
         /// <value>The user_id.</value>
         public int user_id { get; set; }
+
         /// <summary>
-        /// Gets or sets the user_roles.
+        ///     Gets or sets the user_roles.
         /// </summary>
         /// <value>The user_roles.</value>
         public List<string> user_roles { get; set; }
+
         /// <summary>
-        /// Gets or sets the message.
+        ///     Gets or sets the message.
         /// </summary>
         /// <value>The message.</value>
         public Message message { get; set; }

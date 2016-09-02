@@ -15,22 +15,24 @@
 namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
-    /// Class ChannelPlayer.
+    ///     Class ChannelPlayer.
     /// </summary>
     public class ChannelPlayer
     {
         /// <summary>
-        /// Gets or sets the vod.
+        ///     Gets or sets the vod.
         /// </summary>
         /// <value>The vod.</value>
         public string vod { get; set; }
+
         /// <summary>
-        /// Gets or sets the RTMP.
+        ///     Gets or sets the RTMP.
         /// </summary>
         /// <value>The RTMP.</value>
         public string rtmp { get; set; }
+
         /// <summary>
-        /// Gets or sets the FTL.
+        ///     Gets or sets the FTL.
         /// </summary>
         /// <value>The FTL.</value>
         public string ftl { get; set; }

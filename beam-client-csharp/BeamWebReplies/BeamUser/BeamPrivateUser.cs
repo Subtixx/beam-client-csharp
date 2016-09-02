@@ -11,22 +11,17 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
-    /// A fully populater user with channel, preferences, groups and private details.
+    ///     A fully populater user with channel, preferences, groups and private details.
     /// </summary>
     public class BeamPrivateUser : BeamUser
     {
         /// <summary>
-        /// The users password.
-        /// minLength: 4
+        ///     The users password.
+        ///     minLength: 4
         /// </summary>
         public string password;
     }

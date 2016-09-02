@@ -106,8 +106,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BeamEventMessages\BeamEventUserJoin.cs" />
-    <Compile Include="BeamEventMessages\BeamEventUserLeave.cs" />
+    <Compile Include="Messages\BeamEventMessages\BeamEventUserJoin.cs" />
+    <Compile Include="Messages\BeamEventMessages\BeamEventUserLeave.cs" />
     <Compile Include="BeamWebReplies\BeamRedeemable.cs" />
     <Compile Include="BeamWebReplies\BeamPartnershipApp.cs" />
     <Compile Include="BeamWebReplies\BeamEmoticonGroup.cs" />
@@ -128,11 +128,11 @@
     <Compile Include="BeamWebReplies\BeamChannel\GameTypeSimple.cs" />
     <Compile Include="BeamWebReplies\BeamChannel\Resource.cs" />
     <Compile Include="BeamWebReplies\BeamChatInfo.cs" />
-    <Compile Include="BeamEventMessages\ChatMessage\BeamEventChatMessage.cs" />
-    <Compile Include="BeamEventMessages\ChatMessage\Data.cs" />
-    <Compile Include="BeamEventMessages\ChatMessage\Message.cs" />
-    <Compile Include="BeamEventMessages\ChatMessage\Message2.cs" />
-    <Compile Include="BeamEventMessages\ChatMessage\Meta.cs" />
+    <Compile Include="Messages\BeamEventMessages\ChatMessage\BeamEventChatMessage.cs" />
+    <Compile Include="Messages\BeamEventMessages\ChatMessage\Data.cs" />
+    <Compile Include="Messages\BeamEventMessages\ChatMessage\Message.cs" />
+    <Compile Include="Messages\BeamEventMessages\ChatMessage\Message2.cs" />
+    <Compile Include="Messages\BeamEventMessages\ChatMessage\Meta.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamStreamHostAnalytic.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamStreamSessionAnalytic.cs" />
     <Compile Include="BeamWebReplies\BeamRedeemablePartner.cs" />
@@ -152,6 +152,7 @@
     <Compile Include="Messages\BeamEventMessage.cs" />
     <Compile Include="Messages\BeamMessage.cs" />
     <Compile Include="Messages\BeamMethodMessage.cs" />
+    <Compile Include="Messages\BeamMethodMessages\BeamMethodChatMessage.cs" />
     <Compile Include="Messages\BeamReplyMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\UnixTimestamp.cs" />

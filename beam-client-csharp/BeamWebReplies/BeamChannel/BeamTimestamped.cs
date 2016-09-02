@@ -11,30 +11,27 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace beam_client_csharp.BeamWebReplies.BeamChannel
 {
     /// <summary>
-    /// A type that contains information about creation, update and deletion dates.
+    ///     A type that contains information about creation, update and deletion dates.
     /// </summary>
     public class BeamTimestamped
     {
         /// <summary>
-        /// The creation date of the channel.
+        ///     The creation date of the channel.
         /// </summary>
         public string createdAt;
+
         /// <summary>
-        /// The update date of the channel.
-        /// </summary>
-        public string updatedAt;
-        /// <summary>
-        /// The deletion date of the channel.
+        ///     The deletion date of the channel.
         /// </summary>
         public string deletedAt;
+
+        /// <summary>
+        ///     The update date of the channel.
+        /// </summary>
+        public string updatedAt;
     }
 }

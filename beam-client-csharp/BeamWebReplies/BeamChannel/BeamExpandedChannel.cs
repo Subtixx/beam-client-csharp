@@ -11,43 +11,43 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace beam_client_csharp.BeamWebReplies.BeamChannel
 {
     /// <summary>
-    /// Class BeamExpandedChannel.
+    ///     Class BeamExpandedChannel.
     /// </summary>
     public class BeamExpandedChannel : BeamChannelAdvanced
     {
         /// <summary>
-        /// A resource object representing the thumbnail.
-        /// Nullable
-        /// </summary>
-        public Resource thumbnail;
-        /// <summary>
-        /// A resource object representing the cover.
-        /// Nullable
-        /// </summary>
-        public Resource cover;
-        /// <summary>
-        /// A resource object representing the badge.
-        /// Nullable
+        ///     A resource object representing the badge.
+        ///     Nullable
         /// </summary>
         public Resource badge;
+
         /// <summary>
-        /// The cache
+        ///     The cache
         /// </summary>
         public List<object> cache;
 
         /// <summary>
-        /// The channel preferences.
+        ///     A resource object representing the cover.
+        ///     Nullable
         /// </summary>
-        [Obsolete]
-        public ChannelPreferences preferences;
+        public Resource cover;
+
+        /// <summary>
+        ///     The channel preferences.
+        /// </summary>
+        [Obsolete] public ChannelPreferences preferences;
+
+        /// <summary>
+        ///     A resource object representing the thumbnail.
+        ///     Nullable
+        /// </summary>
+        public Resource thumbnail;
     }
 }

@@ -12,85 +12,98 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using beam_client_csharp.BeamWebReplies.BeamChannel;
 
 namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
-    /// Class BeamUser.
-    /// https://dev.beam.pro/rest.html#User
+    ///     Class BeamUser.
+    ///     https://dev.beam.pro/rest.html#User
     /// </summary>
     public class BeamUser : BeamTimestamped
     {
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The unique ID of the user.</value>
         public uint id { get; set; }
+
         /// <summary>
-        /// Gets or sets the level.
+        ///     Gets or sets the level.
         /// </summary>
         /// <value>The users experience level, related to experience.</value>
         public uint level { get; set; }
+
         /// <summary>
-        /// Gets or sets the social.
+        ///     Gets or sets the social.
         /// </summary>
         /// <value>Social links.</value>
         public SocialInfo social { get; set; }
+
         /// <summary>
-        /// Gets or sets the username.
+        ///     Gets or sets the username.
         /// </summary>
-        /// <value>minLength: 4
-        /// maxLength: 20
-        /// pattern: ^[A-Za-z_][\w-]+$</value>
+        /// <value>
+        ///     minLength: 4
+        ///     maxLength: 20
+        ///     pattern: ^[A-Za-z_][\w-]+$
+        /// </value>
         public string username { get; set; }
+
         /// <summary>
-        /// Gets or sets the email.
+        ///     Gets or sets the email.
         /// </summary>
         /// <value>The email.</value>
         public string email { get; set; }
+
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="BeamUser" /> is verified.
+        ///     Gets or sets a value indicating whether this <see cref="BeamUser" /> is verified.
         /// </summary>
         /// <value><c>true</c> if verified email; otherwise, <c>false</c>.</value>
         public bool verified { get; set; }
+
         /// <summary>
-        /// Gets or sets the experience.
+        ///     Gets or sets the experience.
         /// </summary>
         /// <value>The experience.</value>
         public uint experience { get; set; }
+
         /// <summary>
-        /// Gets or sets the sparks.
+        ///     Gets or sets the sparks.
         /// </summary>
         /// <value>The sparks.</value>
         public uint sparks { get; set; }
+
         /// <summary>
-        /// Gets or sets the avatar URL.
+        ///     Gets or sets the avatar URL.
         /// </summary>
         /// <value>The avatar URL.</value>
         public string avatarUrl { get; set; }
+
         /// <summary>
-        /// Gets or sets the bio.
+        ///     Gets or sets the bio.
         /// </summary>
         /// <value>The bio.</value>
         public object bio { get; set; }
+
         /// <summary>
-        /// Gets or sets the primary team.
+        ///     Gets or sets the primary team.
         /// </summary>
         /// <value>The primary team.</value>
         public uint? primaryTeam { get; set; }
 
         /// <summary>
-        /// Gets or sets the transcoding profile identifier.
+        ///     Gets or sets the transcoding profile identifier.
         /// </summary>
         /// <value>The ID of the transcoding profile currently active.</value>
         public uint? transcodingProfileId { get; set; }
+
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has transcodes.
+        ///     Gets or sets a value indicating whether this instance has transcodes.
         /// </summary>
         /// <value><c>true</c> if the user can choose a transcode profile; otherwise, <c>false</c>.</value>
         public bool hasTranscodes { get; set; }
+
         /*
         /// <summary>
         /// Gets or sets the groups.

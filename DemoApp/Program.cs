@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using beam_client_csharp;
-using beam_client_csharp.BeamEventMessages;
-using beam_client_csharp.BeamEventMessages.ChatMessage;
 using beam_client_csharp.EventHandlers;
+using beam_client_csharp.Messages.BeamEventMessages;
+using beam_client_csharp.Messages.BeamEventMessages.ChatMessage;
 using Newtonsoft.Json;
 
 namespace DemoApp
@@ -59,6 +59,10 @@ namespace DemoApp
             {
                 var chatMessage = JsonConvert.DeserializeObject<BeamEventChatMessage>(underlayingMessage);
                 Console.WriteLine("Received Chat message: {0}", chatMessage.data.message.message[0].text);
+                if (chatMessage.data.message.message[0].text == "!help")
+                {
+                    BeamChat.SendChatMessage("Hello! This is a little test. This was sent using the Beam Client C# API written by Subtixx and released under GPLv3");
+                }
             });
 
             Console.ReadKey();

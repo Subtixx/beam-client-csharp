@@ -17,17 +17,18 @@ using System.Collections.Generic;
 namespace beam_client_csharp.BeamWebReplies.BeamUser
 {
     /// <summary>
-    /// Class ChannelNotifications.
+    ///     Class ChannelNotifications.
     /// </summary>
     public class ChannelNotifications
     {
         /// <summary>
-        /// Gets or sets the ids.
+        ///     Gets or sets the ids.
         /// </summary>
         /// <value>The ids.</value>
         public List<string> ids { get; set; }
+
         /// <summary>
-        /// Gets or sets the transports.
+        ///     Gets or sets the transports.
         /// </summary>
         /// <value>The transports.</value>
         public List<string> transports { get; set; }

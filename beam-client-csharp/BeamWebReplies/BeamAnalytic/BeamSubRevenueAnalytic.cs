@@ -11,28 +11,32 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace beam_client_csharp
 {
     /// <summary>
-    /// Class BeamSubRevenueAnalytic.
+    ///     Class BeamSubRevenueAnalytic.
     /// </summary>
     public class BeamSubRevenueAnalytic
     {
         /// <summary>
-        /// The channel
+        ///     The channel
         /// </summary>
         public uint channel;
+
         /// <summary>
-        /// The gateway
-        /// </summary>
-        public string gateway;
-        /// <summary>
-        /// The total
-        /// </summary>
-        public int total;
-        /// <summary>
-        /// The count
+        ///     The count
         /// </summary>
         public uint count;
+
+        /// <summary>
+        ///     The gateway
+        /// </summary>
+        public string gateway;
+
+        /// <summary>
+        ///     The total
+        /// </summary>
+        public int total;
     }
 }

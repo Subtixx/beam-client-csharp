@@ -11,10 +11,11 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+
+namespace beam_client_csharp.Messages.BeamEventMessages.ChatMessage
 {
     /// <summary>
-    /// Class Meta.
+    ///     Class Meta.
     /// </summary>
     public class Meta
     {

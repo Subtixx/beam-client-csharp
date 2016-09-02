@@ -11,21 +11,22 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace beam_client_csharp.BeamWebReplies.BeamChannel
 {
     /// <summary>
-    /// Class BeamChannelAdvanced.
+    ///     Class BeamChannelAdvanced.
     /// </summary>
     public class BeamChannelAdvanced
     {
         /// <summary>
-        /// The game type.
-        /// Nullable
+        ///     The game type.
+        ///     Nullable
         /// </summary>
         public GameType type;
 
         /// <summary>
-        /// The user
+        ///     The user
         /// </summary>
         public BeamUser.BeamUser user;
     }

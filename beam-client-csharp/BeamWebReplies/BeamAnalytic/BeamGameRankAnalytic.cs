@@ -11,32 +11,37 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace beam_client_csharp
 {
     /// <summary>
-    /// Class BeamGameRankAnalytic.
+    ///     Class BeamGameRankAnalytic.
     /// </summary>
     public class BeamGameRankAnalytic
     {
         /// <summary>
-        /// The channel
+        ///     The channel
         /// </summary>
         public uint channel;
+
         /// <summary>
-        /// The streams
-        /// </summary>
-        public uint streams;
-        /// <summary>
-        /// The views
-        /// </summary>
-        public uint views;
-        /// <summary>
-        /// The shared
+        ///     The shared
         /// </summary>
         public uint shared;
+
         /// <summary>
-        /// The time
+        ///     The streams
+        /// </summary>
+        public uint streams;
+
+        /// <summary>
+        ///     The time
         /// </summary>
         public string time;
+
+        /// <summary>
+        ///     The views
+        /// </summary>
+        public uint views;
     }
 }

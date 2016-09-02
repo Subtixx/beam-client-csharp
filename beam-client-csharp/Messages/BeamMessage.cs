@@ -11,15 +11,16 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace beam_client_csharp.Messages
 {
     /// <summary>
-    /// Class BeamMessage.
+    ///     Class BeamMessage.
     /// </summary>
     public class BeamMessage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamMessage"/> class.
+        ///     Initializes a new instance of the <see cref="BeamMessage" /> class.
         /// </summary>
         public BeamMessage()
         {
@@ -27,12 +28,13 @@ namespace beam_client_csharp.Messages
         }
 
         /// <summary>
-        /// Gets or sets the type.
+        ///     Gets or sets the type.
         /// </summary>
         /// <value>The type.</value>
         public string type { get; set; }
+
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         public virtual int id { get; set; }

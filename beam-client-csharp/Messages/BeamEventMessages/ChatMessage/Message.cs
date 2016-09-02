@@ -11,22 +11,24 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+namespace beam_client_csharp.Messages.BeamEventMessages.ChatMessage
 {
     /// <summary>
-    /// Class Message.
+    ///     Class Message.
     /// </summary>
     public class Message
     {
         /// <summary>
-        /// Gets or sets the message.
+        ///     Gets or sets the message.
         /// </summary>
         /// <value>The message.</value>
         public List<Message2> message { get; set; }
+
         /// <summary>
-        /// Gets or sets the meta.
+        ///     Gets or sets the meta.
         /// </summary>
         /// <value>The meta.</value>
         public Meta meta { get; set; }

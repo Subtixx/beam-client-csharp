@@ -11,28 +11,32 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace beam_client_csharp.BeamWebReplies.BeamAnalytic
 {
     /// <summary>
-    /// Class BeamSparkSpendingAnalytic.
+    ///     Class BeamSparkSpendingAnalytic.
     /// </summary>
     public class BeamSparkSpendingAnalytic
     {
         /// <summary>
-        /// The channel
+        ///     The channel
         /// </summary>
         public uint channel;
+
         /// <summary>
-        /// The sparks
+        ///     The sparks
         /// </summary>
         public int sparks;
+
         /// <summary>
-        /// The user
-        /// </summary>
-        public uint user;
-        /// <summary>
-        /// The time
+        ///     The time
         /// </summary>
         public string time;
+
+        /// <summary>
+        ///     The user
+        /// </summary>
+        public uint user;
     }
 }

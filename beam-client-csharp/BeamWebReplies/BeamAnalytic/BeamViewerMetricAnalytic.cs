@@ -15,32 +15,36 @@
 namespace beam_client_csharp.BeamWebReplies.BeamAnalytic
 {
     /// <summary>
-    /// Class BeamViewerMetric.
+    ///     Class BeamViewerMetric.
     /// </summary>
     public class BeamViewerMetricAnalytic
     {
         /// <summary>
-        /// Gets or sets the time.
+        ///     Gets or sets the time.
         /// </summary>
         /// <value>The time.</value>
         public string time { get; set; }
+
         /// <summary>
-        /// Gets or sets the browser.
+        ///     Gets or sets the browser.
         /// </summary>
         /// <value>The browser.</value>
         public string browser { get; set; }
+
         /// <summary>
-        /// Gets or sets the channel.
+        ///     Gets or sets the channel.
         /// </summary>
         /// <value>The channel.</value>
         public int channel { get; set; }
+
         /// <summary>
-        /// Gets or sets the country.
+        ///     Gets or sets the country.
         /// </summary>
         /// <value>The country.</value>
         public string country { get; set; }
+
         /// <summary>
-        /// Gets or sets the platform.
+        ///     Gets or sets the platform.
         /// </summary>
         /// <value>The platform.</value>
         public string platform { get; set; }

@@ -17,37 +17,43 @@ using beam_client_csharp.BeamWebReplies.BeamChannel;
 namespace beam_client_csharp.BeamWebReplies
 {
     /// <summary>
-    /// Class BeamRedeemable.
+    ///     Class BeamRedeemable.
     /// </summary>
     public class BeamRedeemable : BeamTimestamped
     {
         /// <summary>
-        /// The unique ID of the redeemable.
-        /// </summary>
-        public uint id;
-        /// <summary>
-        /// The ID of the owning user.
-        /// </summary>
-        public uint ownerId;
-        /// <summary>
-        /// string(unpaid, paid, redeemed)
-        /// </summary>
-        public string state;
-        /// <summary>
-        /// string(pro)
-        /// </summary>
-        public string type;
-        /// <summary>
-        /// The redeem code.
+        ///     The redeem code.
         /// </summary>
         public string code;
+
         /// <summary>
-        /// The ID of the user that used the code.
+        ///     The unique ID of the redeemable.
         /// </summary>
-        public uint redeemedById;
+        public uint id;
+
         /// <summary>
-        /// The time the item was redeemed.
+        ///     The ID of the owning user.
+        /// </summary>
+        public uint ownerId;
+
+        /// <summary>
+        ///     The time the item was redeemed.
         /// </summary>
         public string redeemedAt;
+
+        /// <summary>
+        ///     The ID of the user that used the code.
+        /// </summary>
+        public uint redeemedById;
+
+        /// <summary>
+        ///     string(unpaid, paid, redeemed)
+        /// </summary>
+        public string state;
+
+        /// <summary>
+        ///     string(pro)
+        /// </summary>
+        public string type;
     }
 }

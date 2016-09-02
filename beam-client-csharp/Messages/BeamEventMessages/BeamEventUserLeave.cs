@@ -11,17 +11,21 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using beam_client_csharp.Messages;
 
-namespace beam_client_csharp.BeamEventMessages
+namespace beam_client_csharp.Messages.BeamEventMessages
 {
     /// <summary>
-    /// Class BeamEventUserLeave.
+    ///     Class BeamEventUserLeave.
     /// </summary>
     public class BeamEventUserLeave : BeamMessage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamEventUserLeave"/> class.
+        ///     The username
+        /// </summary>
+        public string username;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BeamEventUserLeave" /> class.
         /// </summary>
         public BeamEventUserLeave()
         {
@@ -30,14 +34,9 @@ namespace beam_client_csharp.BeamEventMessages
         }
 
         /// <summary>
-        /// The event
+        ///     The event
         /// </summary>
         /// <value>The event.</value>
         public string @event { get; set; }
-
-        /// <summary>
-        /// The username
-        /// </summary>
-        public string username;
     }
 }

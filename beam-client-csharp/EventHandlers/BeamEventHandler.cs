@@ -11,83 +11,113 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using beam_client_csharp.Messages;
+using beam_client_csharp.Messages.BeamEventMessages.ChatMessage;
+using Newtonsoft.Json;
 
 namespace beam_client_csharp.EventHandlers
 {
     /// <summary>
-    /// Enum EventHandlerTypes
+    ///     Enum EventHandlerTypes
     /// </summary>
     public enum EventHandlerTypes
     {
         /// <summary>
-        /// The welcome event
+        ///     The welcome event
         /// </summary>
         WelcomeEvent,
+
         /// <summary>
-        /// The chat message event
+        ///     The chat message event
         /// </summary>
         ChatMessageEvent,
+
         /// <summary>
-        /// The delete message
+        ///     The delete message
         /// </summary>
         DeleteMessage,
+
         /// <summary>
-        /// The purge message
+        ///     The purge message
         /// </summary>
         PurgeMessage,
+
         /// <summary>
-        /// The clear messages
+        ///     The clear messages
         /// </summary>
         ClearMessages,
+
         /// <summary>
-        /// The user update
+        ///     The user update
         /// </summary>
         UserUpdate,
+
         /// <summary>
-        /// The user timeout
+        ///     The user timeout
         /// </summary>
         UserTimeout,
+
         /// <summary>
-        /// The user join
+        ///     The user join
         /// </summary>
         UserJoin,
+
         /// <summary>
-        /// The user leave
+        ///     The user leave
         /// </summary>
         UserLeave,
+
         /// <summary>
-        /// The poll start
+        ///     The poll start
         /// </summary>
         PollStart,
+
         /// <summary>
-        /// The poll end
+        ///     The poll end
         /// </summary>
         PollEnd
     }
 
     /// <summary>
-    /// Class BeamEventHandler.
+    ///     Class BeamEventHandler.
     /// </summary>
-    public static class BeamEventHandler
+    public class BeamEventHandler
     {
         /// <summary>
-        /// Delegate HandleEventFunc
+        ///     Delegate HandleEventFunc
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="underlayingMessage">The underlaying message.</param>
         public delegate void HandleEventFunc(BeamEventMessage message, string underlayingMessage);
 
         /// <summary>
-        /// The _event handlers
+        ///     The _event handlers
         /// </summary>
         private static readonly Dictionary<HandleEventFunc, EventHandlerTypes> _eventHandlers =
             new Dictionary<HandleEventFunc, EventHandlerTypes>();
 
+        public BeamEventHandler()
+        {
+            AddEventHandler(EventHandlerTypes.ChatMessageEvent, (message, underlayingMessage) =>
+            {
+                var eventChatMsg =
+                    JsonConvert.DeserializeObject<BeamEventChatMessage>(underlayingMessage);
+                var chatMessage = eventChatMsg.data.message.message[0].text;
+                switch (chatMessage)
+                {
+                    case "!about":
+                        BeamChat.SendChatMessage(
+                            "Written using the Beam Client C# API by Subtixx! https://github.com/Subtixx/beam-client-csharp");
+                        break;
+                }
+            });
+        }
+
         /// <summary>
-        /// Handles the event.
+        ///     Handles the event.
         /// </summary>
         /// <param name="eventMessage">The event message.</param>
         /// <param name="underlayingMessage">The underlaying message.</param>
@@ -149,7 +179,7 @@ namespace beam_client_csharp.EventHandlers
         }
 
         /// <summary>
-        /// Relays the event to all event functions.
+        ///     Relays the event to all event functions.
         /// </summary>
         /// <param name="eventType">Type of the event.</param>
         /// <param name="eventMessage">The event message.</param>
@@ -163,7 +193,7 @@ namespace beam_client_csharp.EventHandlers
         }
 
         /// <summary>
-        /// Adds the event handler.
+        ///     Adds the event handler.
         /// </summary>
         /// <param name="handlerType">Type of the handler.</param>
         /// <param name="function">The function.</param>
@@ -173,7 +203,7 @@ namespace beam_client_csharp.EventHandlers
         }
 
         /// <summary>
-        /// Removes the event handler.
+        ///     Removes the event handler.
         /// </summary>
         /// <param name="function">The function.</param>
         public static void RemoveEventHandler(HandleEventFunc function)
@@ -182,7 +212,7 @@ namespace beam_client_csharp.EventHandlers
         }
 
         /// <summary>
-        /// Sends the login event.
+        ///     Sends the login event.
         /// </summary>
         private static void SendLoginEvent()
         {

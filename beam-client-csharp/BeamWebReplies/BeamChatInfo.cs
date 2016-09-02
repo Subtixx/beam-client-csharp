@@ -11,27 +11,30 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 
 namespace beam_client_csharp
 {
     /// <summary>
-    /// Class BeamChatInfo.
+    ///     Class BeamChatInfo.
     /// </summary>
     public class BeamChatInfo
     {
         /// <summary>
-        /// Gets or sets the endpoints.
+        ///     Gets or sets the endpoints.
         /// </summary>
         /// <value>The endpoints.</value>
         public List<string> endpoints { get; set; }
+
         /// <summary>
-        /// Gets or sets the authkey.
+        ///     Gets or sets the authkey.
         /// </summary>
         /// <value>The authkey.</value>
         public string authkey { get; set; }
+
         /// <summary>
-        /// Gets or sets the permissions.
+        ///     Gets or sets the permissions.
         /// </summary>
         /// <value>The permissions.</value>
         public List<string> permissions { get; set; }

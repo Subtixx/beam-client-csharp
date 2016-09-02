@@ -11,25 +11,28 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace beam_client_csharp.BeamEventMessages.ChatMessage
+
+namespace beam_client_csharp.Messages.BeamEventMessages.ChatMessage
 {
     /// <summary>
-    /// Class Message2.
+    ///     Class Message2.
     /// </summary>
     public class Message2
     {
         /// <summary>
-        /// Gets or sets the type.
+        ///     Gets or sets the type.
         /// </summary>
         /// <value>The type.</value>
         public string type { get; set; }
+
         /// <summary>
-        /// Gets or sets the data.
+        ///     Gets or sets the data.
         /// </summary>
         /// <value>The data.</value>
         public string data { get; set; }
+
         /// <summary>
-        /// Gets or sets the text.
+        ///     Gets or sets the text.
         /// </summary>
         /// <value>The text.</value>
         public string text { get; set; }

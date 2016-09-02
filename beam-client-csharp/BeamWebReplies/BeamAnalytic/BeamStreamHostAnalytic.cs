@@ -11,27 +11,31 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace beam_client_csharp.BeamWebReplies.BeamAnalytic
 {
     /// <summary>
-    /// Class BeamStreamHost.
+    ///     Class BeamStreamHost.
     /// </summary>
     public class BeamStreamHostAnalytic
     {
         /// <summary>
-        /// The channel
+        ///     The channel
         /// </summary>
         public int channel;
+
         /// <summary>
-        /// The hoster
-        /// </summary>
-        public uint? hoster;
-        /// <summary>
-        /// The hostee
+        ///     The hostee
         /// </summary>
         public uint? hostee;
+
         /// <summary>
-        /// The time as iso date
+        ///     The hoster
+        /// </summary>
+        public uint? hoster;
+
+        /// <summary>
+        ///     The time as iso date
         /// </summary>
         public string time;
     }

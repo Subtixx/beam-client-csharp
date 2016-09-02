@@ -11,10 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using beam_client_csharp.EventHandlers;
 using beam_client_csharp.Messages;
+using beam_client_csharp.Messages.BeamMethodMessages;
 using Newtonsoft.Json;
 using SuperSocket.ClientEngine;
 using WebSocket4Net;
@@ -22,49 +24,53 @@ using WebSocket4Net;
 namespace beam_client_csharp
 {
     /// <summary>
-    /// Class to communicate with Beams Chat
+    ///     Class to communicate with Beams Chat
     /// </summary>
     public class BeamChat
     {
         /// <summary>
-        /// Delegate ReceiveReply
+        ///     Delegate ReceiveReply
         /// </summary>
         /// <param name="message">The message.</param>
         public delegate void ReceiveReply(BeamReplyMessage message);
 
         /// <summary>
-        /// The _websocket
+        ///     The _websocket
         /// </summary>
         private static WebSocket _websocket;
 
         /// <summary>
-        /// The _dic reply functions
+        ///     The _dic reply functions
         /// </summary>
         private static Dictionary<int, ReceiveReply> _dicReplyFunctions;
 
         /// <summary>
-        /// The authentication key
+        ///     The authentication key
         /// </summary>
         public static string AuthKey;
+
         /// <summary>
-        /// The user identifier
+        ///     The user identifier
         /// </summary>
         public static string UserId;
+
         /// <summary>
-        /// The channel identifier
+        ///     The channel identifier
         /// </summary>
         public static string ChannelId;
+
         /// <summary>
-        /// The username
+        ///     The username
         /// </summary>
         public static string Username;
+
         /// <summary>
-        /// The password
+        ///     The password
         /// </summary>
         public static string Password;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamChat"/> class.
+        ///     Initializes a new instance of the <see cref="BeamChat" /> class.
         /// </summary>
         public BeamChat()
         {
@@ -72,7 +78,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Setups the websocket and readies it to connect.
+        ///     Setups the websocket and readies it to connect.
         /// </summary>
         /// <param name="webSocketUrl">The web socket URL.</param>
         public void SetupWebsocket(string webSocketUrl)
@@ -85,7 +91,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Connects the websocket to the server.
+        ///     Connects the websocket to the server.
         /// </summary>
         public void Connect()
         {
@@ -93,7 +99,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Handles the Opened event of the websocket control.
+        ///     Handles the Opened event of the websocket control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
@@ -105,7 +111,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Handles the Closed event of the websocket control.
+        ///     Handles the Closed event of the websocket control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
@@ -117,7 +123,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Handles the Error event of the websocket control.
+        ///     Handles the Error event of the websocket control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="ErrorEventArgs" /> instance containing the event data.</param>
@@ -129,7 +135,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Handles the MessageReceived event of the websocket control.
+        ///     Handles the MessageReceived event of the websocket control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="MessageReceivedEventArgs" /> instance containing the event data.</param>
@@ -142,7 +148,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Processes the messages from beam chat.
+        ///     Processes the messages from beam chat.
         /// </summary>
         /// <param name="message">The message.</param>
         private void ProcessMessage(string message)
@@ -169,15 +175,17 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Sends a message to beam, reports back to the specified function.
+        ///     Sends a message to beam, reports back to the specified function.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="replyFunc">The reply function.</param>
-        public static void SendBeamMessage(BeamMessage message, ReceiveReply replyFunc)
+        public static void SendBeamMessage(BeamMessage message, ReceiveReply replyFunc = null)
         {
-            message.id = message.GetHashCode();
-
-            _dicReplyFunctions.Add(message.id, replyFunc);
+            if (replyFunc != null) // reply is optional.
+            {
+                message.id = message.GetHashCode();
+                _dicReplyFunctions.Add(message.id, replyFunc);
+            }
 
             var jsonMessage = JsonConvert.SerializeObject(message);
 
@@ -185,7 +193,31 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Setups the credentials.
+        ///     Sends a chat message.
+        /// </summary>
+        /// <param name="message">A list of messages.</param>
+        public static void SendChatMessage(List<string> message)
+        {
+            SendBeamMessage(new BeamMethodChatMessage {arguments = message});
+        }
+
+        /// <summary>
+        ///     Sends a chat message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public static void SendChatMessage(string message)
+        {
+            SendBeamMessage(new BeamMethodChatMessage
+            {
+                arguments = new List<string>
+                {
+                    message
+                }
+            });
+        }
+
+        /// <summary>
+        ///     Setups the credentials.
         /// </summary>
         /// <param name="userId">The user unique identifier</param>
         /// <param name="channelId">The channel unique identifier</param>
@@ -198,7 +230,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Setups the credentials.
+        ///     Setups the credentials.
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
@@ -209,7 +241,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        /// Disconnects this instance.
+        ///     Disconnects this instance.
         /// </summary>
         public void Disconnect()
         {

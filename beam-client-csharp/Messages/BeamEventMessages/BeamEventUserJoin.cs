@@ -11,23 +11,28 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using beam_client_csharp.BeamEventMessages.ChatMessage;
-using beam_client_csharp.Messages;
 
-namespace beam_client_csharp.BeamEventMessages
+using System.Collections.Generic;
+
+namespace beam_client_csharp.Messages.BeamEventMessages
 {
     /// <summary>
-    /// Class BeamEventUserJoin.
+    ///     Class BeamEventUserJoin.
     /// </summary>
     public class BeamEventUserJoin : BeamMessage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BeamEventUserJoin"/> class.
+        ///     The roles
+        /// </summary>
+        public List<string> roles;
+
+        /// <summary>
+        ///     The username
+        /// </summary>
+        public string username;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BeamEventUserJoin" /> class.
         /// </summary>
         public BeamEventUserJoin()
         {
@@ -36,16 +41,7 @@ namespace beam_client_csharp.BeamEventMessages
         }
 
         /// <summary>
-        /// The username
-        /// </summary>
-        public string username;
-        /// <summary>
-        /// The roles
-        /// </summary>
-        public List<string> roles;
-
-        /// <summary>
-        /// Gets or sets the event.
+        ///     Gets or sets the event.
         /// </summary>
         /// <value>The event.</value>
         public string @event { get; set; }

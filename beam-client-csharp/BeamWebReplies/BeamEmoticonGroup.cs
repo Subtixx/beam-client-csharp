@@ -11,19 +11,21 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace beam_client_csharp.BeamWebReplies
 {
     /// <summary>
-    /// Class BeamEmoticonGroup.
+    ///     Class BeamEmoticonGroup.
     /// </summary>
     public class BeamEmoticonGroup
     {
         /// <summary>
-        /// X coordinate of the emote.
+        ///     X coordinate of the emote.
         /// </summary>
         public uint x;
+
         /// <summary>
-        /// Y coordinate of the emote.
+        ///     Y coordinate of the emote.
         /// </summary>
         public uint y;
     }
