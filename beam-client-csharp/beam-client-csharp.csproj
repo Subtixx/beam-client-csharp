@@ -106,7 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BeamRedeemable.cs" />
+    <Compile Include="BeamWebReplies\BeamRedeemable.cs" />
     <Compile Include="BeamWebReplies\BeamPartnershipApp.cs" />
     <Compile Include="BeamWebReplies\BeamEmoticonGroup.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamEmojiRankAnalytic.cs" />
