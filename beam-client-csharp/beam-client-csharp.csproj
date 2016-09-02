@@ -106,6 +106,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeamRedeemable.cs" />
+    <Compile Include="BeamWebReplies\BeamPartnershipApp.cs" />
+    <Compile Include="BeamWebReplies\BeamEmoticonGroup.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamEmojiRankAnalytic.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamGameRankAnalytic.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamSubRevenueAnalytic.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="BeamEventMessages\ChatMessage\Meta.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamStreamHostAnalytic.cs" />
     <Compile Include="BeamWebReplies\BeamAnalytic\BeamStreamSessionAnalytic.cs" />
+    <Compile Include="BeamWebReplies\BeamRedeemablePartner.cs" />
     <Compile Include="BeamWebReplies\BeamUser\BeamPrivatePopulatedUser.cs" />
     <Compile Include="BeamWebReplies\BeamUser\BeamPrivateUser.cs" />
     <Compile Include="BeamWebReplies\BeamUser\BeamUser.cs" />

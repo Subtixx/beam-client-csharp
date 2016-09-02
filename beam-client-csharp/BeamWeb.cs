@@ -17,7 +17,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using beam_client_csharp.BeamWebReplies;
 using beam_client_csharp.BeamWebReplies.BeamAnalytic;
 using beam_client_csharp.BeamWebReplies.BeamChannel;
 using beam_client_csharp.BeamWebReplies.BeamUser;
@@ -163,16 +165,24 @@ namespace beam_client_csharp
 
                     response = await client.PostAsync($"https://beam.pro/api/v1/{subUrl}", content);
                 }
-                else if (method == HttpMethod.Put)
-                {
+                else if (method == HttpMethod.Put) // TODO: Put actual data
                     response = await client.PutAsync($"https://beam.pro/api/v1/{subUrl}", new MultipartFormDataContent());
-                }
                 else if(method == HttpMethod.Get)
                     response = await client.GetAsync($"https://beam.pro/api/v1/{subUrl}");
-                else
-                {
-                    throw new NotImplementedException($"Method {method.Method} is not implemented!");
+                else if(method == HttpMethod.Delete)
+                    response = await client.DeleteAsync($"https://beam.pro/api/v1/{subUrl}");
+                else if (method == new HttpMethod("PATCH"))
+                { // Not tested!
+                    if(values == null || !values.ContainsKey("content"))
+                        throw new ArgumentException("PATCH requests must have a dic with key content");
+                    var request = new HttpRequestMessage(method, $"https://beam.pro/api/v1/{subUrl}")
+                    {
+                        Content = new StringContent(values["content"], Encoding.UTF8, "application/json")
+                    };
+                    response = await client.SendAsync(request);
                 }
+                else
+                    throw new NotImplementedException($"Method {method.Method} is not implemented!");
 
                 var responseString = await response.Content.ReadAsStringAsync();
 
@@ -216,6 +226,8 @@ namespace beam_client_csharp
                             throw new Exception($"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
 #endif
                             break;
+                        case HttpStatusCode.NoContent: // ?????
+                            return "true";
                         case (HttpStatusCode)429: // API Rate limit
                             // Prevent calling this page again.
                             if (_remainingApiCalls.ContainsKey(subUrl)) // I dunno but I feel like I don't need to check this as the prev. one is already inserting..
@@ -516,6 +528,187 @@ namespace beam_client_csharp
         public async Task<string> FollowChannel(uint channelId)
         {
             return await Call_API($"channels/{channelId}/follow", null, HttpMethod.Put);
+        }
+
+        /// <summary>
+        /// Unfollows the channel.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        // This currently has no sample of a response.
+        public async Task<string> UnfollowChannel(uint channelId)
+        {
+            return await Call_API($"channels/{channelId}/follow", null, HttpMethod.Delete);
+        }
+
+        /// <summary>
+        /// Gets the emoticons.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        // This currently has no sample of a response.
+        public async Task<string> GetEmoticons(uint channelId, uint? userId = null)
+        {
+            if(userId == null)
+                return await Call_API($"channels/{channelId}/emoticons", null, HttpMethod.Get);
+
+            return await Call_API($"channels/{channelId}/emoticons?user={userId}", null, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Changes the channel's emoticons.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <param name="change">A list of changes described by https://tools.ietf.org/html/rfc6902.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        public async Task<List<BeamEmoticonGroup>> ChangeEmoticons(uint channelId, string change)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string> {{"content", change}};
+
+            return JsonConvert.DeserializeObject< List<BeamEmoticonGroup>>(await Call_API($"channels/{channelId}/emoticons", values, new HttpMethod("PATCH")));
+        }
+
+        /// <summary>
+        /// Redirects to the channel that is being hosted, if this channel is actively hosting.
+        /// </summary>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        /// This currently has no sample of a response.
+        public async Task<string> GetHostee(uint channelId)
+        {
+            return await Call_API($"channels/{channelId}/hostee", null, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Sets the hosted channel.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        public async Task<string> SetHostee(uint channelId, uint id)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string> { { "content", "{\"id\":"+id+"}" } };
+
+            return await Call_API($"channels/{channelId}/hostee", null, HttpMethod.Put);
+        }
+
+        /// <summary>
+        ///  	Stops hosting another channel 
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        /// This currently has no sample of a response.
+        public async Task<string> StopHostee(uint channelId)
+        {
+            return await Call_API($"channels/{channelId}/hostee", null, HttpMethod.Delete);
+        }
+
+        /// <summary>
+        /// Gets a list of channels hosting this channel
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        public async Task<List<BeamChannelAdvanced>> GetHosters(uint channelId)
+        {
+            return JsonConvert.DeserializeObject<List<BeamChannelAdvanced>>(await Call_API($"channels/{channelId}/hosters", null, HttpMethod.Get));
+        }
+
+        /// <summary>
+        /// Gets a stream manifest. Please note that if FTL is enabled for a stream, the manifest will differ.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <param name="type">string(smil, m3u8, light)</param>
+        /// <param name="showAudioOnly">if set to <c>true</c> [show audio only].</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        /// This currently has no sample response
+        /*
+        Body
+            Media Type: application/xml
+            Data Type: object
+
+            Media Type: application/x-mpegurl
+            Data Type: object
+
+            Media Type: application/json
+            Data Type: LightVideoManifest | FTLVideoManifest
+        */
+        public async Task<string> GetStreamManifest(uint channelId, string type, bool showAudioOnly = false)
+        {
+            return await Call_API($"channels/{channelId}/manifest.{type}?showAudioOnly={showAudioOnly}", null, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Gets the partnership application status for this channel.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        public async Task<BeamPartnershipApp> GetPartnershipApp(uint channelId)
+        {
+            return JsonConvert.DeserializeObject<BeamPartnershipApp>(await Call_API($"channels/{channelId}/partnership/app", null, HttpMethod.Get));
+        }
+
+        /// <summary>
+        /// Denies a partnership application.
+        /// Why is this even a thing?
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <param name="reason">The reason.</param>
+        /// <param name="reapply">The reapply.</param>
+        /// <param name="ban">if set to <c>true</c> [ban].</param>
+        /// <returns>Task&lt;System.String&gt;.</returns>
+        public async Task<string> DenyPartnershipApp(uint channelId, string reason, int reapply, bool ban)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>
+            {
+                {"reason", reason},
+                {"reapply", reapply.ToString()},
+                {"ban", ban.ToString()}
+            };
+            return await Call_API($"channels/{channelId}/partnership/app/deny", values, HttpMethod.Post);
+        }
+
+        /// <summary>
+        /// Accepts the partnership application.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;System.Boolean&gt;.</returns>
+        public async Task<bool> AcceptPartnershipApp(uint channelId)
+        {
+            return await Call_API($"channels/{channelId}/partnership/app/deny", null, HttpMethod.Post) == "true";
+        }
+
+        /// <summary>
+        /// Gets the partnership codes.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;List&lt;BeamRedeemable&gt;&gt;.</returns>
+        public async Task<List<BeamRedeemable>> GetPartnershipCodes(uint channelId)
+        {
+            return JsonConvert.DeserializeObject<List<BeamRedeemable>>(await Call_API($"channels/{channelId}/partnership/codes", null, HttpMethod.Get));
+        }
+
+        /// <summary>
+        /// Gets the preferences.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;ChannelPreferences&gt;.</returns>
+        public async Task<ChannelPreferences> GetPreferences(uint channelId)
+        {
+            return JsonConvert.DeserializeObject<ChannelPreferences>(await Call_API($"channels/{channelId}/preferences", null, HttpMethod.Get));
+        }
+
+        /// <summary>
+        /// Sets the preferences.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <returns>Task&lt;ChannelPreferences&gt;.</returns>
+        // TODO: Send actual json instead of empty post request ^.^
+        public async Task<ChannelPreferences> SetPreferences(uint channelId)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            return
+                JsonConvert.DeserializeObject<ChannelPreferences>(
+                    await Call_API($"channels/{channelId}/preferences", values, HttpMethod.Post));
         }
         #endregion
     }
