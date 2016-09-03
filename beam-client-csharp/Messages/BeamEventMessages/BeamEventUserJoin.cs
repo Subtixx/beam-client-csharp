@@ -22,16 +22,6 @@ namespace beam_client_csharp.Messages.BeamEventMessages
     public class BeamEventUserJoin : BeamMessage
     {
         /// <summary>
-        ///     The roles
-        /// </summary>
-        public List<string> roles;
-
-        /// <summary>
-        ///     The username
-        /// </summary>
-        public string username;
-
-        /// <summary>
         ///     Initializes a new instance of the <see cref="BeamEventUserJoin" /> class.
         /// </summary>
         public BeamEventUserJoin()
@@ -45,5 +35,25 @@ namespace beam_client_csharp.Messages.BeamEventMessages
         /// </summary>
         /// <value>The event.</value>
         public string @event { get; set; }
+		
+		public BeamChatJoinUser data;
     }
+	
+	public class BeamChatJoinUser
+	{
+		/// <summary>
+        ///     The roles
+        /// </summary>
+        public List<string> roles;
+
+        /// <summary>
+        ///     The username
+        /// </summary>
+        public string username;
+		
+		/// <summary>
+        ///     The user id
+        /// </summary>
+		public uint id;
+	}
 }

@@ -20,9 +20,9 @@ namespace beam_client_csharp.Messages.BeamEventMessages
     public class BeamEventUserLeave : BeamMessage
     {
         /// <summary>
-        ///     The username
+        ///     The user data
         /// </summary>
-        public string username;
+        public BeamChatLeaveUser data;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="BeamEventUserLeave" /> class.
@@ -39,4 +39,17 @@ namespace beam_client_csharp.Messages.BeamEventMessages
         /// <value>The event.</value>
         public string @event { get; set; }
     }
+	
+	public class BeamChatLeaveUser
+	{
+        /// <summary>
+        ///     The username
+        /// </summary>
+        public string username;
+		
+		/// <summary>
+        ///     The user id
+        /// </summary>
+		public uint id;
+	}
 }

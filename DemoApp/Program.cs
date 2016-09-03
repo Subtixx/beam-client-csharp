@@ -8,6 +8,7 @@ using beam_client_csharp.Messages;
 using beam_client_csharp.Messages.BeamEventMessages;
 using beam_client_csharp.Messages.BeamEventMessages.ChatMessage;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DemoApp
 {
@@ -49,17 +50,17 @@ namespace DemoApp
             BeamEventHandler.AddEventHandler(EventHandlerTypes.UserJoin, ((message, underlayingMessage) =>
             {
                 var userJoinEv = JsonConvert.DeserializeObject<BeamEventUserJoin>(underlayingMessage);
-                Console.WriteLine("User joined: " + userJoinEv.username);
+                Console.WriteLine("User joined: " + userJoinEv.data.username);
 				
-				ActiveUsers.Add(userJoinEv.username);
+				ActiveUsers.Add(userJoinEv.data.username);
             }));
 
             BeamEventHandler.AddEventHandler(EventHandlerTypes.UserLeave, ((message, underlayingMessage) =>
             {
                 var userLeaveEv = JsonConvert.DeserializeObject<BeamEventUserLeave>(underlayingMessage);
-                Console.WriteLine("User left: " + userLeaveEv.username);
+                Console.WriteLine("User left: " + userLeaveEv.data.username);
 				
-				ActiveUsers.Remove(userLeaveEv.username);
+				ActiveUsers.Remove(userLeaveEv.data.username);
             }));
 
             BeamEventHandler.AddEventHandler(EventHandlerTypes.ChatMessageEvent, (message, underlayingMessage) =>
@@ -100,6 +101,21 @@ namespace DemoApp
 				}
             });
 			
+			
+			BeamEventHandler.AddEventHandler(EventHandlerTypes.WelcomeEvent, (message, underlayingMessage) =>
+            {
+				BeamChat.SendBeamMessage(new BeamMethodMessage{
+					method = "history"
+				}, replyMessage =>
+				{
+					List<Data> historyMessages = ((JArray)replyMessage.data).ToObject<List<Data>>();
+					foreach(Data msg in historyMessages)
+					{
+						Console.WriteLine(msg.message.message[0].text);
+					}
+				});
+			});
+			
 			string line = "";
 			while(line != "quit")
 			{
@@ -111,9 +127,9 @@ namespace DemoApp
 					break;
 					
 					case "clear":
-						BeamMethodMessage method = new BeamMethodMessage();
-						method.method = "clearMessages";
-						BeamChat.SendBeamMessage(method);
+						BeamChat.SendBeamMessage(new BeamMethodMessage{
+							method = "clearMessages"
+						});
 					break;
 					
 					default:

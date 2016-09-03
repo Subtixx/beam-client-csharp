@@ -68,6 +68,8 @@ namespace beam_client_csharp
         ///     The password
         /// </summary>
         public static string Password;
+		
+		public static bool Authenticated;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="BeamChat" /> class.
@@ -95,7 +97,7 @@ namespace beam_client_csharp
         /// </summary>
         public void Connect()
         {
-            _websocket.Open();
+			_websocket.Open();
         }
 
         /// <summary>
@@ -154,6 +156,9 @@ namespace beam_client_csharp
         private void ProcessMessage(string message)
         {
             var beamMessage = JsonConvert.DeserializeObject<BeamMessage>(message);
+			
+			if(beamMessage.type == null)
+				return;
 
             switch (beamMessage.type)
             {
@@ -189,6 +194,10 @@ namespace beam_client_csharp
 
             var jsonMessage = JsonConvert.SerializeObject(message);
 
+#if DEBUG
+            Console.WriteLine("Sent: " + jsonMessage);
+#endif
+			
             _websocket.Send(jsonMessage);
         }
 

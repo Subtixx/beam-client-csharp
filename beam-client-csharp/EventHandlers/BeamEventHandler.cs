@@ -131,9 +131,7 @@ namespace beam_client_csharp.EventHandlers
                     throw new NotImplementedException(eventMessage.@event);
 
                 case "WelcomeEvent":
-                    SendLoginEvent();
-
-                    RelayEvent(EventHandlerTypes.WelcomeEvent, eventMessage, underlayingMessage);
+                    SendLoginEvent(eventMessage, underlayingMessage);
                     break;
 
                 case "ChatMessage":
@@ -215,7 +213,7 @@ namespace beam_client_csharp.EventHandlers
         /// <summary>
         ///     Sends the login event.
         /// </summary>
-        private static void SendLoginEvent()
+        private static void SendLoginEvent(BeamEventMessage eventMessage, string underlayingMessage)
         {
             var args = new List<string> {BeamChat.ChannelId};
 
@@ -256,6 +254,9 @@ namespace beam_client_csharp.EventHandlers
                     !string.IsNullOrEmpty(BeamChat.Password)
                     )
                     throw new Exception("Chat authentication failed!");
+					
+				BeamChat.Authenticated = (bool)replyData["authenticated"];
+				RelayEvent(EventHandlerTypes.WelcomeEvent, eventMessage, underlayingMessage);
             });
         }
     }
