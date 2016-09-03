@@ -39,7 +39,7 @@ namespace beam_client_csharp.Messages
         ///     Gets or sets the data.
         /// </summary>
         /// <value>Associated event data - may be of any type, specific to the event.</value>
-        public Dictionary<string, object> data { get; set; }
+        public object data { get; set; }
 
         /// <summary>
         ///     Gets or sets the identifier.

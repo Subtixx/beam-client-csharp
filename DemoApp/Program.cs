@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml;
 using beam_client_csharp;
 using beam_client_csharp.EventHandlers;
+using beam_client_csharp.Messages;
 using beam_client_csharp.Messages.BeamEventMessages;
 using beam_client_csharp.Messages.BeamEventMessages.ChatMessage;
 using Newtonsoft.Json;
@@ -13,6 +14,8 @@ namespace DemoApp
     internal class Program
     {
         private static Dictionary<string, string> _configDictionary;
+		
+		public static List<string> ActiveUsers = new List<string>();
 
         private static void Main(string[] args)
         {
@@ -47,25 +50,77 @@ namespace DemoApp
             {
                 var userJoinEv = JsonConvert.DeserializeObject<BeamEventUserJoin>(underlayingMessage);
                 Console.WriteLine("User joined: " + userJoinEv.username);
+				
+				ActiveUsers.Add(userJoinEv.username);
             }));
 
             BeamEventHandler.AddEventHandler(EventHandlerTypes.UserLeave, ((message, underlayingMessage) =>
             {
                 var userLeaveEv = JsonConvert.DeserializeObject<BeamEventUserLeave>(underlayingMessage);
                 Console.WriteLine("User left: " + userLeaveEv.username);
+				
+				ActiveUsers.Remove(userLeaveEv.username);
             }));
 
             BeamEventHandler.AddEventHandler(EventHandlerTypes.ChatMessageEvent, (message, underlayingMessage) =>
             {
                 var chatMessage = JsonConvert.DeserializeObject<BeamEventChatMessage>(underlayingMessage);
-                Console.WriteLine("Received Chat message: {0}", chatMessage.data.message.message[0].text);
-                if (chatMessage.data.message.message[0].text == "!help")
-                {
-                    BeamChat.SendChatMessage("Hello! This is a little test. This was sent using the Beam Client C# API written by Subtixx and released under GPLv3");
-                }
+				string chatText = chatMessage.data.message.message[0].text;
+                Console.WriteLine("Received Chat message: {0}", chatText);
+				switch(chatText)
+				{
+					case "!help":
+						BeamChat.SendChatMessage("Hello! This is a little test. This was sent using the Beam Client C# API written by Subtixx and released under GPLv3");
+					break;
+					
+					case "!list":
+						string sendString = "";
+						if(ActiveUsers.Count > 0)
+						{
+							for(int i = 0; i <= ActiveUsers.Count; i++)
+							{
+								sendString += ActiveUsers[i];
+								if(i < ActiveUsers.Count)
+									sendString += ", ";
+							}
+							BeamChat.SendChatMessage($"Users in this channel: {sendString}");
+						}else
+							BeamChat.SendChatMessage("No users online :(");
+					break;
+					
+					case "!shutdown":
+						if(chatMessage.data.user_roles.Contains("Owner"))
+						{
+							BeamChat.SendChatMessage("Shutting down!");
+							Environment.Exit(0);
+						} else {
+							BeamChat.SendChatMessage("No permission!");
+						}
+					break;
+				}
             });
-
-            Console.ReadKey();
+			
+			string line = "";
+			while(line != "quit")
+			{
+				line = Console.ReadLine();
+				switch(line)
+				{
+					case "quit":
+						Environment.Exit(0);
+					break;
+					
+					case "clear":
+						BeamMethodMessage method = new BeamMethodMessage();
+						method.method = "clearMessages";
+						BeamChat.SendBeamMessage(method);
+					break;
+					
+					default:
+						Console.WriteLine("Unknown command!");
+					break;
+				}
+			}
 
             bChat.Disconnect();
             /*BeamChat beamChat = new BeamChat();

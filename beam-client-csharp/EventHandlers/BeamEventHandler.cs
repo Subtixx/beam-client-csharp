@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using beam_client_csharp.Messages;
 using beam_client_csharp.Messages.BeamEventMessages.ChatMessage;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace beam_client_csharp.EventHandlers
 {
@@ -250,7 +251,8 @@ namespace beam_client_csharp.EventHandlers
                 arguments = args
             }, replyMessage =>
             {
-                if (!(bool) replyMessage.data["authenticated"] && !string.IsNullOrEmpty(BeamChat.Username) &&
+				Dictionary<string, object> replyData = ((JObject)replyMessage.data).ToObject<Dictionary<string,object>>();
+                if (!(bool) replyData["authenticated"] && !string.IsNullOrEmpty(BeamChat.Username) &&
                     !string.IsNullOrEmpty(BeamChat.Password)
                     )
                     throw new Exception("Chat authentication failed!");
