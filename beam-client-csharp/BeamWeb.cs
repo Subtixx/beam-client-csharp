@@ -4,7 +4,7 @@
 // Created          : 08-31-2016
 //
 // Last Modified By : Subtixx
-// Last Modified On : 09-02-2016
+// Last Modified On : 09-03-2016
 // ***********************************************************************
 // <copyright file="BeamWeb.cs" company="Flying Penguin">
 //     Copyright ©  2016
@@ -29,37 +29,37 @@ using Newtonsoft.Json;
 namespace beam_client_csharp
 {
     /// <summary>
-    ///     Class BeamWeb.
+    /// Class BeamWeb.
     /// </summary>
     public class BeamWeb
     {
         /// <summary>
-        ///     The API call reset
+        /// The API call reset
         /// </summary>
         private readonly Dictionary<string, DateTime> _apiCallReset = new Dictionary<string, DateTime>();
 
         /// <summary>
-        ///     The remaining API calls
+        /// The remaining API calls
         /// </summary>
         private readonly Dictionary<string, int> _remainingApiCalls = new Dictionary<string, int>();
 
         /// <summary>
-        ///     The total allowed API calls
+        /// The total allowed API calls
         /// </summary>
         private readonly Dictionary<string, int> _totalAllowedApiCalls = new Dictionary<string, int>();
 
         /// <summary>
-        ///     The _cookie container
+        /// The _cookie container
         /// </summary>
         private CookieContainer _cookieContainer;
 
         /// <summary>
-        ///     The _CSRF token
+        /// The _CSRF token
         /// </summary>
         private string _csrfToken;
 
         /// <summary>
-        ///     Authenticates the specified username.
+        /// Authenticates the specified username.
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
@@ -80,7 +80,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Get information about a channel chat.
+        /// Get information about a channel chat.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;BeamChatInfo&gt;.</returns>
@@ -90,7 +90,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the achievements.
+        /// Gets the achievements.
         /// </summary>
         /// <returns>Task&lt;List&lt;BeamAchievement&gt;&gt;.</returns>
         public async Task<List<BeamAchievement>> GetAchievements()
@@ -99,10 +99,10 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Creates the announcement.
+        /// Creates the announcement.
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         [Obsolete("This method is not implemented", false)]
         public void CreateAnnouncement()
         {
@@ -124,12 +124,14 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Call_s the API.
+        /// Call_s the API.
         /// </summary>
         /// <param name="subUrl">The sub URL.</param>
         /// <param name="values">The values.</param>
         /// <param name="method">The method.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
+        /// <exception cref="System.ArgumentException">PATCH requests must have a dic with key content</exception>
+        /// <exception cref="System.NotImplementedException">$Method {method.Method} is not implemented!</exception>
         /// <exception cref="NotImplementedException">$Method {method.Method} is not implemented!</exception>
         private async Task<string> Call_API(string subUrl, Dictionary<string, string> values = null,
             HttpMethod method = null)
@@ -178,11 +180,7 @@ namespace beam_client_csharp
                     // Not tested!
                     if (values == null || !values.ContainsKey("content"))
                         throw new ArgumentException("PATCH requests must have a dic with key content");
-                    var request = new HttpRequestMessage(method, $"https://beam.pro/api/v1/{subUrl}")
-                    {
-                        Content = new StringContent(values["content"], Encoding.UTF8, "application/json")
-                    };
-                    response = await client.SendAsync(request);
+                    response = await client.PatchAsync($"https://beam.pro/api/v1/{subUrl}", new StringContent(values["content"], Encoding.UTF8, "application/json"));
                 }
                 else
                     throw new NotImplementedException($"Method {method.Method} is not implemented!");
@@ -264,7 +262,7 @@ namespace beam_client_csharp
         #region Channels
 
         /// <summary>
-        ///     Lists the channels.
+        /// Lists the channels.
         /// </summary>
         /// <param name="page">The page.</param>
         /// <param name="limit">The limit.</param>
@@ -283,7 +281,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the channel.
+        /// Gets the channel.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;BeamChannel.BeamChannel&gt;.</returns>
@@ -293,7 +291,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the channel details.
+        /// Gets the channel details.
         /// </summary>
         /// <param name="channelIdOrToken">The channel identifier or token.</param>
         /// <returns>Task&lt;BeamChannel.BeamChannel&gt;.</returns>
@@ -307,7 +305,7 @@ namespace beam_client_csharp
         #region Analytics
 
         /// <summary>
-        ///     Gets the viewer count.
+        /// Gets the viewer count.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From (isoDate).</param>
@@ -324,7 +322,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the viewers metrics.
+        /// Gets the viewers metrics.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -342,7 +340,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the stream sessions.
+        /// Gets the stream sessions.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -360,7 +358,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the stream hosts.
+        /// Gets the stream hosts.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -377,7 +375,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the subscriptions.
+        /// Gets the subscriptions.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -394,7 +392,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the followers.
+        /// Gets the followers.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -411,7 +409,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the sparks spent.
+        /// Gets the sparks spent.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -428,7 +426,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the emoji ranks.
+        /// Gets the emoji ranks.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -445,7 +443,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the emoji usage.
+        /// Gets the emoji usage.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -462,7 +460,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the game ranks.
+        /// Gets the game ranks.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -479,7 +477,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the global game ranks.
+        /// Gets the global game ranks.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -496,7 +494,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the sub revenue.
+        /// Gets the sub revenue.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="from">From.</param>
@@ -517,9 +515,10 @@ namespace beam_client_csharp
         #region Misc Actions
 
         /// <summary>
-        ///     Sets the badge.
+        /// Sets the badge.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
+        /// <exception cref="System.NotImplementedException"></exception>
         /// <exception cref="NotImplementedException"></exception>
         public void SetBadge(uint channelId)
         {
@@ -533,7 +532,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Lists the followers.
+        /// Lists the followers.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="page">The page.</param>
@@ -557,7 +556,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Follows the channel.
+        /// Follows the channel.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
@@ -568,7 +567,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Unfollows the channel.
+        /// Unfollows the channel.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
@@ -579,7 +578,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the emoticons.
+        /// Gets the emoticons.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="userId">The user identifier.</param>
@@ -594,10 +593,10 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Changes the channel's emoticons.
+        /// Changes the channel's emoticons.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
-        /// <param name="change">A list of changes described by https://tools.ietf.org/html/rfc6902.</param>
+        /// <param name="change">A list of changes described by https://tools.ietf.org/html/rfc6902</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
         public async Task<List<BeamEmoticonGroup>> ChangeEmoticons(uint channelId, string change)
         {
@@ -609,8 +608,9 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Redirects to the channel that is being hosted, if this channel is actively hosting.
+        /// Redirects to the channel that is being hosted, if this channel is actively hosting.
         /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
         /// This currently has no sample of a response.
         public async Task<string> GetHostee(uint channelId)
@@ -619,7 +619,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Sets the hosted channel.
+        /// Sets the hosted channel.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="id">The identifier.</param>
@@ -632,7 +632,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Stops hosting another channel
+        /// Stops hosting another channel
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
@@ -643,7 +643,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets a list of channels hosting this channel
+        /// Gets a list of channels hosting this channel
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
@@ -655,7 +655,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets a stream manifest. Please note that if FTL is enabled for a stream, the manifest will differ.
+        /// Gets a stream manifest. Please note that if FTL is enabled for a stream, the manifest will differ.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="type">string(smil, m3u8, light)</param>
@@ -681,7 +681,8 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the partnership application status for this channel.
+        /// Gets the partnership application status for this channel.
+        /// Why is this even a thing?
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.String&gt;.</returns>
@@ -693,8 +694,8 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Denies a partnership application.
-        ///     Why is this even a thing?
+        /// Denies a partnership application.
+        /// Why is this even a thing?
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <param name="reason">The reason.</param>
@@ -713,7 +714,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Accepts the partnership application.
+        /// Accepts the partnership application.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;System.Boolean&gt;.</returns>
@@ -723,7 +724,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the partnership codes.
+        /// Gets the partnership codes.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;List&lt;BeamRedeemable&gt;&gt;.</returns>
@@ -735,7 +736,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Gets the preferences.
+        /// Gets the preferences.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;ChannelPreferences&gt;.</returns>
@@ -747,7 +748,7 @@ namespace beam_client_csharp
         }
 
         /// <summary>
-        ///     Sets the preferences.
+        /// Sets the preferences.
         /// </summary>
         /// <param name="channelId">The channel identifier.</param>
         /// <returns>Task&lt;ChannelPreferences&gt;.</returns>
