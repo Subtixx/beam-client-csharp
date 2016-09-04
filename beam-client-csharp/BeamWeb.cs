@@ -51,7 +51,7 @@ namespace beam_client_csharp
         /// <summary>
         /// The _cookie container
         /// </summary>
-        private CookieContainer _cookieContainer;
+        public CookieContainer CookieContainer;
 
         /// <summary>
         /// The _CSRF token
@@ -154,8 +154,8 @@ namespace beam_client_csharp
                 }
             }
 
-            if (_cookieContainer == null) _cookieContainer = new CookieContainer();
-            using (var handler = new HttpClientHandler {CookieContainer = _cookieContainer})
+            if (CookieContainer == null) CookieContainer = new CookieContainer();
+            using (var handler = new HttpClientHandler {CookieContainer = CookieContainer})
             using (var client = new HttpClient(handler))
             {
                 client.DefaultRequestHeaders.Add("X-CSRF-Token", _csrfToken);
@@ -184,6 +184,46 @@ namespace beam_client_csharp
                 }
                 else
                     throw new NotImplementedException($"Method {method.Method} is not implemented!");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    switch (response.StatusCode)
+                    {
+                        default:
+                            Console.WriteLine(
+                                $"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
+#if !DEBUG
+                            throw new Exception($"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
+#else // Generate no warning on release build.
+                            break;
+#endif
+                        case HttpStatusCode.NoContent: // ?????
+                            return "true";
+                        case (HttpStatusCode)429: // API Rate limit
+                            // Prevent calling this page again.
+                            if (_remainingApiCalls.ContainsKey(subUrl))
+                                // I dunno but I feel like I don't need to check this as the prev. one is already inserting..
+                                _remainingApiCalls[subUrl] = 0;
+                            else
+                                _remainingApiCalls.Add(subUrl, 0);
+                            Console.WriteLine("API Rate limit hit. Preventing further calling!");
+                            break;
+                        case (HttpStatusCode)461: // CSRF Missing
+                        case HttpStatusCode.BadRequest:
+                            // Retry with CSRF, maybe bad because it's recursive call?
+                            _csrfToken = response.Headers.GetValues("X-CSRF-Token").FirstOrDefault();
+                            return await Call_API(subUrl, values, method);
+
+                        // Bad or expired token. This can happen if the user or Beam revoked or expired an access token.
+                        // To fix, you should re- authenticate the user.
+                        case (HttpStatusCode)401: // Unauthorized / Login missing
+                            break;
+
+                            //Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...).
+                            // Unfortunately, re-authenticating the user won't help here.
+                            //Can also indicate a missing permission for the action attempted.
+                            //case (HttpStatusCode)403: // Forbidden
+                    }}
 
                 var responseString = await response.Content.ReadAsStringAsync();
 
@@ -216,45 +256,6 @@ namespace beam_client_csharp
                 Console.WriteLine($"{subUrl} result: {responseString}");
 #endif
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    switch (response.StatusCode)
-                    {
-                        default:
-                            Console.WriteLine(
-                                $"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
-#if !DEBUG
-                            throw new Exception($"Error occurred, the status code is: {response.StatusCode}\nPlease contact the developer!");
-#else // Generate no warning on release build.
-                            break;
-#endif
-                        case HttpStatusCode.NoContent: // ?????
-                            return "true";
-                        case (HttpStatusCode) 429: // API Rate limit
-                            // Prevent calling this page again.
-                            if (_remainingApiCalls.ContainsKey(subUrl))
-                                // I dunno but I feel like I don't need to check this as the prev. one is already inserting..
-                                _remainingApiCalls[subUrl] = 0;
-                            else
-                                _remainingApiCalls.Add(subUrl, 0);
-                            Console.WriteLine("API Rate limit hit. Preventing further calling!");
-                            break;
-                        case (HttpStatusCode) 461: // CSRF Missing
-                            // Retry with CSRF, maybe bad because it's recursive call?
-                            _csrfToken = response.Headers.GetValues("X-CSRF-Token").FirstOrDefault();
-                            return await Call_API(subUrl, values, method);
-
-                        // Bad or expired token. This can happen if the user or Beam revoked or expired an access token.
-                        // To fix, you should re- authenticate the user.
-                        case (HttpStatusCode) 401: // Unauthorized / Login missing
-                            break;
-
-                        //Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...).
-                        // Unfortunately, re-authenticating the user won't help here.
-                        //Can also indicate a missing permission for the action attempted.
-                        //case (HttpStatusCode)403: // Forbidden
-                    }
-                }
                 return responseString;
             }
         }
